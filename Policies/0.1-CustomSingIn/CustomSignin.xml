@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="Hellofreshgotest.onmicrosoft.com"
+  PolicyId="B2C_1A_custom_signin"
+  PublicPolicyUri="http://Hellofreshgotest.onmicrosoft.com/B2C_1A_cutom_signin">
+
+  <BasePolicy>
+    <TenantId>Hellofreshgotest.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+
+<ClaimsProviders>
+    <ClaimsProvider>
+    <DisplayName>Self Asserted</DisplayName>
+    <TechnicalProfiles>
+        <TechnicalProfile Id="Custom-SelfAsserted-LocalAccountSignin-Email">
+            <DisplayName>Custom Local Account Signin</DisplayName>
+            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+            <Metadata>
+                <Item Key="SignUpTarget">SignUpWithLogonEmailExchange</Item>
+                <Item Key="setting.operatingMode">Email</Item>
+                <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+                <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
+            </Metadata>
+            <IncludeInSso>false</IncludeInSso>
+            <InputClaims>
+                <InputClaim ClaimTypeReferenceId="signInName" DefaultValue="{OIDC:LoginHint}" AlwaysUseDefaultValue="true" />
+            </InputClaims>
+            <OutputClaims>
+                <OutputClaim ClaimTypeReferenceId="signInName" Required="true" />
+                <OutputClaim ClaimTypeReferenceId="password" Required="true" />
+                <OutputClaim ClaimTypeReferenceId="objectId" />
+                <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+            </OutputClaims>
+            <ValidationTechnicalProfiles>
+                <ValidationTechnicalProfile ReferenceId="login-NonInteractive" />
+            </ValidationTechnicalProfiles>
+            <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+    </TechnicalProfiles>
+    </ClaimsProvider>
+</ClaimsProviders>
+
+  <UserJourneys>
+    <UserJourney Id="CustomSignIn">
+    <OrchestrationSteps>
+    <!-- Since Azure AD B2C understands that this is a sign in page, you must specify the ClaimsProviderSelections element with at least one reference
+    to a ClaimsProviderSelection. This ClaimsProviderSelection maps to the ClaimsExchange, which ultimately 
+    calls a technical profile called SelfAsserted-LocalAccountSignin-Email. -->
+      <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.localaccountsignin">
+        <ClaimsProviderSelections>
+            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+        </ClaimsProviderSelections>
+        <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="Custom-SelfAsserted-LocalAccountSignin-Email" />
+        </ClaimsExchanges>
+      </OrchestrationStep>
+      <OrchestrationStep Order="2" Type="ClaimsExchange">
+        <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+        </ClaimsExchanges>
+      </OrchestrationStep>
+      <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+    </OrchestrationSteps>
+    </UserJourney>
+  </UserJourneys>
+
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="CustomSignIn" />
+    <TechnicalProfile Id="CustomSignIn">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
+
+
+

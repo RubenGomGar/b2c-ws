@@ -1,0 +1,11 @@
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\B2CDemo.Api.exe
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\B2CDemo.Api.dll
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\B2CDemo.Api.deps.json
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\B2CDemo.Api.runtimeconfig.json
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\B2CDemo.Api.pdb
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Charlas\DotnetMalaga2022\B2CDemo\B2CDemo.Api\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
