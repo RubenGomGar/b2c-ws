@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l9PAufCzkCZBGMy9Q/iqWPD8FGpvSm2WTnamGwo6pLtKWQDhUShlTv3s/dHZyhHwhipFKi01ELZaJskSzCXFqw==",
+  "dgSpecHash": "BUr9I94uTiezaen/mANVCbpWUkdazA28tR6N5078FJtYIHD72S14M4lVIYfZMRxBfTJSjVgaSrF7Y+hswGtLjg==",
   "success": true,
-  "projectFilePath": "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
+  "projectFilePath": "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rbgomez\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\rbgomez\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

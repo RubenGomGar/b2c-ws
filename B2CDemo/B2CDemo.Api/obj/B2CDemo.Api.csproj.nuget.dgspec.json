@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj": {}
+    "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj": {}
   },
   "projects": {
-    "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj": {
+    "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
+        "projectUniqueName": "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
         "projectName": "B2CDemo.Api",
-        "projectPath": "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
+        "projectPath": "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\B2CDemo.Api.csproj",
         "packagesPath": "C:\\Users\\rbgomez\\.nuget\\packages\\",
-        "outputPath": "C:\\Charlas\\DotnetMalaga2022\\B2CDemo\\B2CDemo.Api\\obj\\",
+        "outputPath": "C:\\Charlas\\b2c-ws\\B2CDemo\\B2CDemo.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rbgomez\\AppData\\Roaming\\NuGet\\NuGet.Config",
