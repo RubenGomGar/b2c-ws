@@ -6,6 +6,7 @@ El repo está compuesto de la siguiente forma:
  - Exercises: Contenido de los ejercicios del los tres días. Sería interesante tener un readme.md con el paso a paso que deben seguir e igual publicar en una rama del repo con la nomenclatura features/d{n}-ex{n} (ej. features/d2-ex9) con el ejercicio resuelto (Si aplica tener ejercicio).
  - Policies: Aquí tengo las políticas Base para los días 2 y 3 con los casos de uso E2E del día 3. Esta parte estaría casi completa.
  - B2C Workshop.pptx -> Aquí tenemos la PPT de los tres días.
+ - assets: diferentes archivos conteniendo diagramas, imágenes y logos para utilizar con Azure AD B2C.
 
 
 **Principalmente necesitaría ayuda en el día 1. Me está costando dar cierre y tenerla lista porque siempre se me ocurren más cosas que añadir. Mil gracias.**
