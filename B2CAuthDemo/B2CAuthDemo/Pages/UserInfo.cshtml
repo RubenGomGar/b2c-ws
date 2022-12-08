@@ -1,0 +1,14 @@
+﻿@page
+@model UserInfoModel
+@{
+    ViewData["Title"] = "User info";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Here is your user info:</p>
+<ul>
+    @foreach (var claim in User.Claims)
+    {
+        <li><b>@claim.Type:</b> @claim.Value</li>
+    }
+</ul>
