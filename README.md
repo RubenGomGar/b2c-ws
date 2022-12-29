@@ -6,7 +6,7 @@ El repo está compuesto de la siguiente forma:
  - B2CAuthDemo: Aplicación web de ejemplo en .NET 7 con ASP.NET para autenticarse con Azure AD B2C mediante Microsoft.Identity.
  - B2CDemo: Api de NetCore que usamos en algunos technical profiles
  - Exercises: Contenido de los ejercicios del los tres días. Sería interesante tener un readme.md con el paso a paso que deben seguir e igual publicar en una rama del repo con la nomenclatura features/d{n}-ex{n} (ej. features/d2-ex9) con el ejercicio resuelto (Si aplica tener ejercicio).
- - Policies: Aquí tengo las políticas Base para los días 2 y 3 con los casos de uso E2E del día 3. Esta parte estaría casi completa.
+ - Policies: Aquí tengo las políticas Base para el día 3 con los casos de uso E2E del día 3. Esta parte estaría casi completa.
  - B2C Workshop.pptx -> Aquí tenemos la PPT de los tres días.
  - assets: diferentes archivos conteniendo diagramas, imágenes y logos para utilizar con Azure AD B2C.
 
@@ -52,7 +52,7 @@ Aunque la idea principal es hacer este día más interactivo, si sería necesari
 
 Este día está mas enfocado a hacer la practica de escenarios complejos. Los ejemplos los tengo ya listos y funcionando. Solo me quedan los readme.md con el stepByStep.
 
-- 1 - CustomSingIn
+- 1 - CustomSignIn
 - 2 - CustomSignUp
 - 3 - CustomizeUserInput
 - 4 - SignInMemberUser

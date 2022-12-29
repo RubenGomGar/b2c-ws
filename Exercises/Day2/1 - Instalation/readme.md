@@ -163,7 +163,7 @@ Para el uso de las políticas del starter pack, debemos de hacer los siguientes 
 3. Guardamos los cambios.
 
 4. **(Opcional)** si estamos compartiendo un tenant de Azure B2C o queremos que nuestras políticas tengan un nombre único y que no colisionen con otras:
-    - Buscamos a en todos los ficheros `.xml` la palabra clave `PolicyId` y añadimos un pequeño sufijo con nuestras iniciales (p.ej. `_RPA`).
+    - Buscamos a en todos los ficheros `.xml` la palabra clave `PolicyId` y `PublicPolicyUri` y añadimos un pequeño sufijo con nuestras iniciales (p.ej. `_RPA`).
 
 5. Volvemos a nuestro recurso/tenant de Azure B2C en el portal de Azure y seleccionamos `Identity Experience Framework` desde el menú.
 
