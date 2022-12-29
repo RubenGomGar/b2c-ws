@@ -11,8 +11,6 @@ El repo está compuesto de la siguiente forma:
  - assets: diferentes archivos conteniendo diagramas, imágenes y logos para utilizar con Azure AD B2C.
 
 
-**Principalmente necesitaría ayuda en el día 1. Me está costando dar cierre y tenerla lista porque siempre se me ocurren más cosas que añadir. Mil gracias.**
-
 ## DAY 1
 
 Aunque la idea principal es hacer este día más interactivo, si sería necesario un mínimo de slides. EL contenido inicial sería el que propuso Victor.
@@ -28,8 +26,6 @@ Aunque la idea principal es hacer este día más interactivo, si sería necesari
 
 
 ## DAY 2
-
-En principio toda esta parte la tengo finiquitada. Solo me queda hacer los readme.md con el paso a paso de los ejercicios y las ramas del resultado de los ejercicios.
 
 - a.	Identity Framework Experience
 - b.	Diferencias básico y custom
