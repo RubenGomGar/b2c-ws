@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  DeploymentMode="Development"
+  UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="b2cworkshoppc.onmicrosoft.com"
+  PolicyId="B2C_1A_ClaimPredicatesExercise"
+  PublicPolicyUri="http://b2cworkshoppc.onmicrosoft.com/B2C_1A_ClaimPredicatesExercise">
+
+  <BasePolicy>
+    <TenantId>b2cworkshoppc.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <ClaimType Id="password">
+        <DisplayName>Password</DisplayName>
+        <DataType>string</DataType>
+        <AdminHelpText>Enter password</AdminHelpText>
+        <UserHelpText>Enter password</UserHelpText>
+        <UserInputType>Password</UserInputType>
+        <PredicateValidationReference Id="StrongPassword" />
+      </ClaimType>
+      <ClaimType Id="country">
+        <DisplayName>Country where you work</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>DropdownSingleSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Spain" Value="spain" />
+          <Enumeration Text="United States" Value="usa" SelectByDefault="true" />
+          <Enumeration Text="Canada" Value="canada" />
+        </Restriction>
+      </ClaimType>
+      <ClaimType Id="dateOfIncorporation">
+        <DisplayName>Date Of Incorporation</DisplayName>
+        <DataType>date</DataType>
+        <UserHelpText>The date on which you started working with us.</UserHelpText>
+        <UserInputType>DateTimeDropdown</UserInputType>
+        <PredicateValidationReference Id="CustomDateRange" />
+      </ClaimType>
+    </ClaimsSchema>
+    <Predicates>
+      <Predicate Id="DateRange" Method="IsDateRange"
+        HelpText="The date must be between today and end of current year.">
+        <Parameters>
+          <Parameter Id="Minimum">Today</Parameter>
+          <Parameter Id="Maximum">2023-12-31</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="Lowercase" Method="IncludesCharacters" HelpText="a lowercase letter">
+        <Parameters>
+          <Parameter Id="CharacterSet">a-z</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="Uppercase" Method="IncludesCharacters" HelpText="an uppercase letter">
+        <Parameters>
+          <Parameter Id="CharacterSet">A-Z</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="Number" Method="IncludesCharacters" HelpText="a digit">
+        <Parameters>
+          <Parameter Id="CharacterSet">0-9</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="Symbol" Method="IncludesCharacters" HelpText="a symbol">
+        <Parameters>
+          <Parameter Id="CharacterSet">@#$%^&amp;*\-_+=[]{}|\\:',.?/`~"();!</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="AllowedAADCharacters" Method="MatchesRegex"
+        HelpText="An invalid character was provided.">
+        <Parameters>
+          <Parameter Id="RegularExpression">(^([0-9A-Za-z\d@#$%^&amp;*\-_+=[\]{}|\\:',?/`~"();!
+            ]|(\.(?!@)))+$)|(^$)</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="IsLengthBetween8And64" Method="IsLengthRange"
+        HelpText="The password must be between 8 and 64 characters.">
+        <Parameters>
+          <Parameter Id="Minimum">8</Parameter>
+          <Parameter Id="Maximum">64</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="DisallowedWhitespace" Method="MatchesRegex"
+        HelpText="The password must not begin or end with a whitespace character.">
+        <Parameters>
+          <Parameter Id="RegularExpression">(^\S.*\S$)|(^\S+$)|(^$)</Parameter>
+        </Parameters>
+      </Predicate>
+    </Predicates>
+    <PredicateValidations>
+      <PredicateValidation Id="CustomDateRange">
+        <PredicateGroups>
+          <PredicateGroup Id="DateRangeGroup">
+            <PredicateReferences>
+              <PredicateReference Id="DateRange" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+      <PredicateValidation Id="StrongPassword">
+        <PredicateGroups>
+          <PredicateGroup Id="DisallowedWhitespaceGroup">
+            <PredicateReferences>
+              <PredicateReference Id="DisallowedWhitespace" />
+            </PredicateReferences>
+          </PredicateGroup>
+          <PredicateGroup Id="AllowedAADCharactersGroup">
+            <PredicateReferences>
+              <PredicateReference Id="AllowedAADCharacters" />
+            </PredicateReferences>
+          </PredicateGroup>
+          <PredicateGroup Id="LengthGroup">
+            <PredicateReferences>
+              <PredicateReference Id="IsLengthBetween8And64" />
+            </PredicateReferences>
+          </PredicateGroup>
+          <PredicateGroup Id="CharacterClasses">
+            <UserHelpText>The password must have at least 3 of the following:</UserHelpText>
+            <PredicateReferences MatchAtLeast="3">
+              <PredicateReference Id="Lowercase" />
+              <PredicateReference Id="Uppercase" />
+              <PredicateReference Id="Number" />
+              <PredicateReference Id="Symbol" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+    </PredicateValidations>
+  </BuildingBlocks>
+
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>Self Asserted</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="SignupUser">
+          <DisplayName>Sign-up user</DisplayName>
+          <Protocol Name="Proprietary"
+            Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" />
+            <InputClaim ClaimTypeReferenceId="newPassword" />
+            <InputClaim ClaimTypeReferenceId="reenterPassword" />
+            <InputClaim ClaimTypeReferenceId="displayName" />
+            <InputClaim ClaimTypeReferenceId="givenName" />
+            <InputClaim ClaimTypeReferenceId="surname" />
+            <InputClaim ClaimTypeReferenceId="country" />
+            <InputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+            <OutputClaim ClaimTypeReferenceId="newUser" />
+
+            <!-- Optional claims, to be collected from the user -->
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+            <OutputClaim ClaimTypeReferenceId="givenName" />
+            <OutputClaim ClaimTypeReferenceId="surname" />
+            <OutputClaim ClaimTypeReferenceId="country" />
+            <OutputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+          </OutputClaims>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+
+  <UserJourneys>
+    <UserJourney Id="CustomizeUserInput">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="SendClaims"
+          CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+  </UserJourneys>
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="CustomizeUserInput" />
+    <TechnicalProfile Id="CustomizeUserInput">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="country" />
+        <OutputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true"
+          DefaultValue="{Policy:TenantObjectId}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

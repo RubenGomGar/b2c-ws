@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  DeploymentMode="Development"
+  UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="b2cworkshoppc.onmicrosoft.com"
+  PolicyId="B2C_1A_DemoPredicates"
+  PublicPolicyUri="http://b2cworkshoppc.onmicrosoft.com/B2C_1A_DemoPredicates">
+
+  <BasePolicy>
+    <TenantId>b2cworkshoppc.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <ClaimType Id="departmentName">
+        <DisplayName>Department name</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Your department name</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+        <PredicateValidationReference Id="CustomIsLengthBetween8And64" />
+      </ClaimType>
+      <ClaimType Id="membershipNumber">
+        <DisplayName>Membership number</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Your membership number</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+        <PredicateValidationReference Id="CustomPIN" />
+      </ClaimType>
+      <ClaimType Id="membershipId">
+        <DisplayName>Membership ID</DisplayName>
+        <DataType>string</DataType>
+        <UserHelpText>Your membership ID</UserHelpText>
+        <UserInputType>TextBox</UserInputType>
+        <PredicateValidationReference Id="CustomLowercase" />
+      </ClaimType>
+      <ClaimType Id="dateOfIncorporation">
+        <DisplayName>Date Of Incorporation</DisplayName>
+        <DataType>date</DataType>
+        <UserHelpText>The date on which you started working with us.</UserHelpText>
+        <UserInputType>DateTimeDropdown</UserInputType>
+        <PredicateValidationReference Id="CustomDateRange" />
+      </ClaimType>
+    </ClaimsSchema>
+    <Predicates>
+      <Predicate Id="IsLengthBetween8And64" Method="IsLengthRange"
+        HelpText="The Department name must be between 8 and 64 characters.">
+        <Parameters>
+          <Parameter Id="Minimum">8</Parameter>
+          <Parameter Id="Maximum">64</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="PIN" Method="MatchesRegex"
+        HelpText="The Membership number must be numbers only.">
+        <Parameters>
+          <Parameter Id="RegularExpression">^[0-9]+$</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="Lowercase" Method="IncludesCharacters" HelpText="a lowercase letter">
+        <Parameters>
+          <Parameter Id="CharacterSet">a-z</Parameter>
+        </Parameters>
+      </Predicate>
+      <Predicate Id="DateRange" Method="IsDateRange"
+        HelpText="The date must be between 2000-01-01 and today.">
+        <Parameters>
+          <Parameter Id="Minimum">2000-01-01</Parameter>
+          <Parameter Id="Maximum">Today</Parameter>
+        </Parameters>
+      </Predicate>
+    </Predicates>
+    <PredicateValidations>
+      <PredicateValidation Id="CustomDateRange">
+        <PredicateGroups>
+          <PredicateGroup Id="DateRangeGroup">
+            <PredicateReferences>
+              <PredicateReference Id="DateRange" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+      <PredicateValidation Id="CustomLowercase">
+        <PredicateGroups>
+          <PredicateGroup Id="LowercaseGroup">
+            <PredicateReferences>
+              <PredicateReference Id="Lowercase" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+      <PredicateValidation Id="CustomPIN">
+        <PredicateGroups>
+          <PredicateGroup Id="PINGroup">
+            <PredicateReferences>
+              <PredicateReference Id="PIN" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+      <PredicateValidation Id="CustomIsLengthBetween8And64">
+        <PredicateGroups>
+          <PredicateGroup Id="IsLengthBetween8And64Group">
+            <PredicateReferences>
+              <PredicateReference Id="IsLengthBetween8And64" />
+            </PredicateReferences>
+          </PredicateGroup>
+        </PredicateGroups>
+      </PredicateValidation>
+    </PredicateValidations>
+  </BuildingBlocks>
+
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>Self Asserted</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="SignupUser">
+          <DisplayName>Sign-up user</DisplayName>
+          <Protocol Name="Proprietary"
+            Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" />
+            <InputClaim ClaimTypeReferenceId="newPassword" />
+            <InputClaim ClaimTypeReferenceId="reenterPassword" />
+            <InputClaim ClaimTypeReferenceId="displayName" />
+            <InputClaim ClaimTypeReferenceId="givenName" />
+            <InputClaim ClaimTypeReferenceId="surname" />
+            <InputClaim ClaimTypeReferenceId="departmentName" />
+            <InputClaim ClaimTypeReferenceId="membershipNumber" />
+            <InputClaim ClaimTypeReferenceId="membershipId" />
+            <InputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+            <OutputClaim ClaimTypeReferenceId="newUser" />
+
+            <!-- Optional claims, to be collected from the user -->
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+            <OutputClaim ClaimTypeReferenceId="givenName" />
+            <OutputClaim ClaimTypeReferenceId="surname" />
+            <OutputClaim ClaimTypeReferenceId="departmentName" />
+            <OutputClaim ClaimTypeReferenceId="membershipNumber" />
+            <OutputClaim ClaimTypeReferenceId="membershipId" />
+            <OutputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+          </OutputClaims>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+
+  <UserJourneys>
+    <UserJourney Id="CustomizeUserInput">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="SendClaims"
+          CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+  </UserJourneys>
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="CustomizeUserInput" />
+    <TechnicalProfile Id="CustomizeUserInput">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="departmentName" />
+        <OutputClaim ClaimTypeReferenceId="membershipNumber" />
+        <OutputClaim ClaimTypeReferenceId="membershipId" />
+        <OutputClaim ClaimTypeReferenceId="dateOfIncorporation" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true"
+          DefaultValue="{Policy:TenantObjectId}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>

@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  DeploymentMode="Development"
+  UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="b2cworkshoppc.onmicrosoft.com"
+  PolicyId="B2C_1A_ClaimsTransformationsExercise"
+  PublicPolicyUri="http://b2cworkshoppc.onmicrosoft.com/B2C_1A_ClaimsTransformationsExercise">
+
+  <BasePolicy>
+    <TenantId>b2cworkshoppc.onmicrosoft.com</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <ClaimType Id="employeeIdChanged">
+        <DisplayName>Indicates if the original employeeId has changed</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="hasAcceptedAllTerms">
+        <DisplayName>Indicates if the employee had a previous id</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="rulesComparisionResult">
+        <DisplayName>Indicates if the employee has accepted the rules</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="canPerformAllActions">
+        <DisplayName>Indicates if the employee has age to perform all actions</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="drivingRestricted">
+        <DisplayName>Indicates if the employee has driving restrictions</DisplayName>
+        <DataType>boolean</DataType>
+      </ClaimType>
+      <ClaimType Id="employeeId">
+        <DisplayName>Your original employee identification number (if any)</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>TextBox</UserInputType>
+      </ClaimType>
+      <ClaimType Id="employeeIdNew">
+        <DisplayName>Your actual employee Identification number</DisplayName>
+        <DataType>string</DataType>
+        <UserInputType>TextBox</UserInputType>
+      </ClaimType>
+      <ClaimType Id="termsOfUse">
+        <DisplayName>Términos de uso</DisplayName>
+        <DataType>boolean</DataType>
+        <UserHelpText>Términos de uso</UserHelpText>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Acepto los términos de uso" Value="true" SelectByDefault="false" />
+        </Restriction>
+      </ClaimType>
+      <ClaimType Id="privacyPolicy">
+        <DisplayName>Política de privacidad</DisplayName>
+        <DataType>boolean</DataType>
+        <UserHelpText>Política de privacidad</UserHelpText>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Acepto la política de privacidad" Value="true" SelectByDefault="false" />
+        </Restriction>
+      </ClaimType>
+      <ClaimType Id="readAccountRules">
+        <DisplayName>Reglas de la cuenta</DisplayName>
+        <DataType>boolean</DataType>
+        <UserHelpText>Reglas de la cuenta</UserHelpText>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Acepto las reglas de la cuenta" Value="true" SelectByDefault="false" />
+        </Restriction>
+      </ClaimType>
+      <ClaimType Id="isAgeOver21Years">
+        <DisplayName>Comprobación de edad</DisplayName>
+        <DataType>boolean</DataType>
+        <UserHelpText>Comprobación de edad</UserHelpText>
+        <UserInputType>CheckboxMultiSelect</UserInputType>
+        <Restriction>
+          <Enumeration Text="Tengo más de 21 años" Value="true" SelectByDefault="false" />
+        </Restriction>
+      </ClaimType>
+    </ClaimsSchema>
+    <ClaimsTransformations>
+      <ClaimsTransformation Id="HasEmployeeIdChanged" TransformationMethod="CompareClaims">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="employeeId" TransformationClaimType="inputClaim1" />
+          <InputClaim ClaimTypeReferenceId="employeeIdNew" TransformationClaimType="inputClaim2" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="operator" DataType="string" Value="NOT EQUAL" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="employeeIdChanged" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="HasAcceptedAllTerms" TransformationMethod="AndClaims">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="termsOfUse" TransformationClaimType="inputClaim1" />
+          <InputClaim ClaimTypeReferenceId="privacyPolicy" TransformationClaimType="inputClaim2" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="hasAcceptedAllTerms" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="AssertReadAccountRulesIsTrue" TransformationMethod="AssertBooleanClaimIsEqualToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="readAccountRules" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="AssertCanPerformAllActions" TransformationMethod="CompareBooleanClaimToValue">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="isAgeOver21Years" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+          <InputParameter Id="valueToCompareTo" DataType="boolean" Value="true" />
+        </InputParameters>
+        <OutputClaims>
+          <OutputClaim  ClaimTypeReferenceId="canPerformAllActions" TransformationClaimType="compareResult"/>
+        </OutputClaims>
+      </ClaimsTransformation>
+      <ClaimsTransformation Id="CheckIfEmployeeCannotDrive" TransformationMethod="NotClaims">
+        <InputClaims>
+          <InputClaim ClaimTypeReferenceId="isAgeOver21Years" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <OutputClaims>
+          <OutputClaim ClaimTypeReferenceId="drivingRestricted" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+      </ClaimsTransformation>
+    </ClaimsTransformations>
+  </BuildingBlocks>
+
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>Self Asserted</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="AssertRulesRead">
+          <DisplayName>Readed rules</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.ClaimsTransformationProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="rulesComparisionResult" DefaultValue="false" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="AssertReadAccountRulesIsTrue" />
+          </OutputClaimsTransformations>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+        </TechnicalProfile>
+        <TechnicalProfile Id="SignupUser">
+          <DisplayName>Sign-up user</DisplayName>
+          <Protocol Name="Proprietary"
+            Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+            <Item Key="UserMessageIfClaimsTransformationBooleanValueIsNotEqual">You must accept the rules.</Item>
+          </Metadata>
+          <CryptographicKeys>
+            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+          </CryptographicKeys>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" />
+            <InputClaim ClaimTypeReferenceId="newPassword" />
+            <InputClaim ClaimTypeReferenceId="reenterPassword" />
+            <InputClaim ClaimTypeReferenceId="displayName" />
+            <InputClaim ClaimTypeReferenceId="givenName" />
+            <InputClaim ClaimTypeReferenceId="surname" />
+            <InputClaim ClaimTypeReferenceId="employeeId" />
+            <InputClaim ClaimTypeReferenceId="employeeIdNew" />
+            <InputClaim ClaimTypeReferenceId="termsOfUse" />
+            <InputClaim ClaimTypeReferenceId="privacyPolicy" />
+            <InputClaim ClaimTypeReferenceId="readAccountRules" />
+            <InputClaim ClaimTypeReferenceId="isAgeOver21Years" />
+          </InputClaims>
+          <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="objectId" />
+            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+            <OutputClaim ClaimTypeReferenceId="newUser" />
+
+            <!-- Optional claims, to be collected from the user -->
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+            <OutputClaim ClaimTypeReferenceId="givenName" />
+            <OutputClaim ClaimTypeReferenceId="surname" />
+            <OutputClaim ClaimTypeReferenceId="employeeId" />
+            <OutputClaim ClaimTypeReferenceId="employeeIdNew" />
+            <OutputClaim ClaimTypeReferenceId="termsOfUse" />
+            <OutputClaim ClaimTypeReferenceId="privacyPolicy" />
+            <OutputClaim ClaimTypeReferenceId="readAccountRules" />
+            <OutputClaim ClaimTypeReferenceId="isAgeOver21Years" />
+          </OutputClaims>
+          <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="HasEmployeeIdChanged" />
+            <OutputClaimsTransformation ReferenceId="HasAcceptedAllTerms" />
+            <OutputClaimsTransformation ReferenceId="AssertCanPerformAllActions" />
+            <OutputClaimsTransformation ReferenceId="CheckIfEmployeeCannotDrive" />
+          </OutputClaimsTransformations>
+          <ValidationTechnicalProfiles>
+            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+            <ValidationTechnicalProfile ReferenceId="AssertRulesRead" />
+          </ValidationTechnicalProfiles>
+          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+
+  <UserJourneys>
+    <UserJourney Id="CustomizeUserInput">
+      <OrchestrationSteps>
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
+          <ClaimsExchanges>
+            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
+          </ClaimsExchanges>
+        </OrchestrationStep>
+        <OrchestrationStep Order="2" Type="SendClaims"
+          CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
+  </UserJourneys>
+
+  <RelyingParty>
+    <DefaultUserJourney ReferenceId="CustomizeUserInput" />
+    <TechnicalProfile Id="CustomizeUserInput">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="employeeIdChanged" />
+        <OutputClaim ClaimTypeReferenceId="hasAcceptedAllTerms" />
+        <OutputClaim ClaimTypeReferenceId="canPerformAllActions" />
+        <OutputClaim ClaimTypeReferenceId="drivingRestricted" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true"
+          DefaultValue="{Policy:TenantObjectId}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
+  </RelyingParty>
+</TrustFrameworkPolicy>
