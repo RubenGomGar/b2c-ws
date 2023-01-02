@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TrustFrameworkPolicy
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+  PolicySchemaVersion="0.3.0.0"
+  TenantId="[TENANT]"
+  PolicyId="B2C_1A_multi_brand_flow"
+  PublicPolicyUri="http://[TENANT]/B2C_1A_multi_brand_flow">
+
+  <BasePolicy>
+    <TenantId>[TENANT]</TenantId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+  </BasePolicy>
+
+  <BuildingBlocks>
+    <ClaimsSchema>
+      <!-- Claims Schemas Place Holder -->
+    </ClaimsSchema>
+    
+    <ClaimsTransformations>
+      <!-- Claims Transformations Place Holder -->
+    </ClaimsTransformations>
+
+    <ClientDefinitions>
+      <!-- Content Definitions Place Holder -->
+    </ContentDefinitions>
+
+    <DisplayControls>
+      <!-- Display Controls Place Holder -->
+    </DisplayControls>
+  </BuildingBlocks>
+
+
+  <ClaimsProviders>
+    <ClaimsProvider>
+      <DisplayName>Self Asserted</DisplayName>
+      <TechnicalProfiles>
+        <!-- Technical Profiles Place Holder -->
+      </TechnicalProfiles>
+    </ClaimsProvider>
+  </ClaimsProviders>
+
+  <UserJourneys>
+    <!-- User Journey Place Holder -->
+  </UserJourneys>
+
+  <RelyingParty>
+    <!-- Relying Party Place Holder -->
+  </RelyingParty>
+
+</TrustFrameworkPolicy>
+
+
+

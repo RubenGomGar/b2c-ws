@@ -13,51 +13,15 @@
     <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
   </BasePolicy>
 
-
-<ClaimsProviders>
-    <ClaimsProvider>
-    <DisplayName>Self Asserted</DisplayName>
-    <TechnicalProfiles>
-        <TechnicalProfile Id="Custom-SelfAsserted-LocalAccountSignin-Email">
-            <DisplayName>Custom Local Account Signin</DisplayName>
-            <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-            <Metadata>
-                <Item Key="SignUpTarget">SignUpWithLogonEmailExchange</Item>
-                <Item Key="setting.operatingMode">Email</Item>
-                <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
-                <Item Key="IncludeClaimResolvingInClaimsHandling">true</Item>
-            </Metadata>
-            <IncludeInSso>false</IncludeInSso>
-            <InputClaims>
-                <InputClaim ClaimTypeReferenceId="signInName" DefaultValue="{OIDC:LoginHint}" AlwaysUseDefaultValue="true" />
-            </InputClaims>
-            <OutputClaims>
-                <OutputClaim ClaimTypeReferenceId="signInName" Required="true" />
-                <OutputClaim ClaimTypeReferenceId="password" Required="true" />
-                <OutputClaim ClaimTypeReferenceId="objectId" />
-                <OutputClaim ClaimTypeReferenceId="authenticationSource" />
-            </OutputClaims>
-            <ValidationTechnicalProfiles>
-                <ValidationTechnicalProfile ReferenceId="login-NonInteractive" />
-            </ValidationTechnicalProfiles>
-            <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
-        </TechnicalProfile>
-    </TechnicalProfiles>
-    </ClaimsProvider>
-</ClaimsProviders>
-
   <UserJourneys>
     <UserJourney Id="CustomSignIn">
     <OrchestrationSteps>
-    <!-- Since Azure AD B2C understands that this is a sign in page, you must specify the ClaimsProviderSelections element with at least one reference
-    to a ClaimsProviderSelection. This ClaimsProviderSelection maps to the ClaimsExchange, which ultimately 
-    calls a technical profile called SelfAsserted-LocalAccountSignin-Email. -->
       <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.localaccountsignin">
         <ClaimsProviderSelections>
             <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
         </ClaimsProviderSelections>
         <ClaimsExchanges>
-            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="Custom-SelfAsserted-LocalAccountSignin-Email" />
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
         </ClaimsExchanges>
       </OrchestrationStep>
       <OrchestrationStep Order="2" Type="ClaimsExchange">

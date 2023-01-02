@@ -37,12 +37,12 @@
       <TechnicalProfiles>
          <TechnicalProfile Id="login-NonInteractive">
           <Metadata>
-            <Item Key="client_id">f62dc048-00bb-46c1-b856-4b1ef2d9c189</Item>
-            <Item Key="IdTokenAudience">b57d1d03-4b79-4be5-a9d9-b42d11bee83c</Item>
+            <Item Key="client_id">f62dc048-00bb-46c1-b856-4b1ef2d9c189</Item> <!-- ProxyIdentityExperienceFramework ApplicationId  -->
+            <Item Key="IdTokenAudience">b57d1d03-4b79-4be5-a9d9-b42d11bee83c</Item> <!-- IdentityExperienceFramework ApplicationId -->
           </Metadata>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="f62dc048-00bb-46c1-b856-4b1ef2d9c189" />
-            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="b57d1d03-4b79-4be5-a9d9-b42d11bee83c" />
+            <InputClaim ClaimTypeReferenceId="client_id" DefaultValue="f62dc048-00bb-46c1-b856-4b1ef2d9c189" /> <!-- ProxyIdentityExperienceFramework ApplicationId  -->
+            <InputClaim ClaimTypeReferenceId="resource_id" PartnerClaimType="resource" DefaultValue="b57d1d03-4b79-4be5-a9d9-b42d11bee83c" /> <!-- IdentityExperienceFramework ApplicationId -->
           </InputClaims>
         </TechnicalProfile>
       </TechnicalProfiles>
