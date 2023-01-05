@@ -34,16 +34,8 @@
     <ClaimsProvider>
       <DisplayName>Self Asserted</DisplayName>
       <TechnicalProfiles>
-        <TechnicalProfile Id="SignupUser">
-          <DisplayName>Sign-up user</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
-            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
-          </Metadata>
-          <CryptographicKeys>
-            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
-          </CryptographicKeys>
+        <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="email"/>
             <InputClaim ClaimTypeReferenceId="newPassword" />
@@ -53,6 +45,7 @@
             <InputClaim ClaimTypeReferenceId="surname" />
             <InputClaim ClaimTypeReferenceId="city" />
           </InputClaims>
+          
            <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="objectId" />
             <OutputClaim ClaimTypeReferenceId="email" Required="true" />
@@ -68,10 +61,7 @@
             <OutputClaim ClaimTypeReferenceId="surName" />
             <OutputClaim ClaimTypeReferenceId="city"/>
           </OutputClaims>
-          <ValidationTechnicalProfiles>
-            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-          </ValidationTechnicalProfiles>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
@@ -82,7 +72,7 @@
       <OrchestrationSteps>
         <OrchestrationStep Order="1" Type="ClaimsExchange">
           <ClaimsExchanges>
-            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
+            <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
           </ClaimsExchanges>
         </OrchestrationStep>
         <OrchestrationStep Order="2" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />

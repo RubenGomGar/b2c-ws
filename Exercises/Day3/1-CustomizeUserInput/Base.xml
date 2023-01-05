@@ -7,12 +7,12 @@
   UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
   PolicySchemaVersion="0.3.0.0"
   TenantId="[TENANT]"
-  PolicyId="B2C_1A_CustomizeUserInput"
-  PublicPolicyUri="[TENANT]/B2C_1A_CustomizeUserInput">
+  PolicyId="B2C_1A_CustomizeUserInput_[INICIALES]"
+  PublicPolicyUri="[TENANT]/B2C_1A_CustomizeUserInput_[INICIALES]">
 
   <BasePolicy>
     <TenantId>[TENANT]</TenantId>
-    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions_[INICIALES]</PolicyId>
   </BasePolicy>
 
   <BuildingBlocks>
@@ -25,18 +25,41 @@
     <ClaimsProvider>
       <DisplayName>Self Asserted</DisplayName>
       <TechnicalProfiles>
-        <TechnicalProfile Id="SignupUser">
-            <!-- TechnicalProfile Place Holder -->
-        </TechnicalProfile>
+          <!-- TechnicalProfile Place Holder -->
       </TechnicalProfiles>
     </ClaimsProvider>
   </ClaimsProviders>
 
   <UserJourneys>
-    <!-- User Journey Place Holder -->
+    <UserJourney Id="CustomSignUp">
+    <OrchestrationSteps>
+    <!-- To handle sign up, we must have one additional orchestration step, which allows the user to provide their email, 
+    new password, and name. And upon validating this information, we must write an account to the directory. -->
+      <OrchestrationStep Order="1" Type="ClaimsExchange">
+        <ClaimsExchanges>
+          <ClaimsExchange Id="SignUpWithLogonEmailExchange" TechnicalProfileReferenceId="LocalAccountSignUpWithLogonEmail" />
+        </ClaimsExchanges>
+      </OrchestrationStep>
+      <OrchestrationStep Order="2" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+    </OrchestrationSteps>
+    </UserJourney>
   </UserJourneys>
 
+
   <RelyingParty>
-    <!-- Relying Party Place Holder -->
+    <DefaultUserJourney ReferenceId="CustomSignUp" />
+    <TechnicalProfile Id="CustomSignUp">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
   </RelyingParty>
 </TrustFrameworkPolicy>

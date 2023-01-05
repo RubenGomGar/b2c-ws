@@ -5,12 +5,12 @@
   xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
   PolicySchemaVersion="0.3.0.0"
   TenantId="[TENANT]"
-  PolicyId="B2C_1A_custom_signin"
-  PublicPolicyUri="[TENANT]/B2C_1A_cutom_signin">
+  PolicyId="B2C_1A_custom_signin_[INICIALES]"
+  PublicPolicyUri="[TENANT]/B2C_1A_cutom_signin_[INICIALES]">
 
   <BasePolicy>
     <TenantId>[TENANT]</TenantId>
-    <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+    <PolicyId>B2C_1A_TrustFrameworkExtensions_[INICIALES]</PolicyId>
   </BasePolicy>
 
 
