@@ -157,7 +157,7 @@
 			</TechnicalProfiles>
 		</ClaimsProvider>
 
-		<ClaimsProvider>
+		<!-- <ClaimsProvider>
 			<DisplayName>Local Account Password Reset - Read migration flag</DisplayName>
 			<TechnicalProfiles>
 				<TechnicalProfile Id="Get-requiresMigration-status-password-reset">
@@ -219,7 +219,7 @@
 					</ValidationTechnicalProfiles>
 				</TechnicalProfile>
 			</TechnicalProfiles>
-		</ClaimsProvider>
+		</ClaimsProvider> -->
 	</ClaimsProviders>
 
 	<UserJourneys>
