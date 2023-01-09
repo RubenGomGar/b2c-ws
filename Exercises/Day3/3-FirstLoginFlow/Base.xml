@@ -30,11 +30,28 @@
   </ClaimsProviders>
 
   <UserJourneys>
-    <!-- User Journey Place Holder -->
+    <UserJourney Id="SignUpOrSignInWithForcePasswordReset">
+      <OrchestrationSteps>
+        <!-- Orchestatiom Steps Place Holder -->
+      </OrchestrationSteps>
+      <ClientDefinition ReferenceId="DefaultWeb" />
+    </UserJourney>
   </UserJourneys>
 
   <RelyingParty>
-    <!-- Relying Party Place Holder -->
+    <DefaultUserJourney ReferenceId="SignUpOrSignInWithForcePasswordReset" />
+    <TechnicalProfile Id="PolicyProfile">
+      <DisplayName>PolicyProfile</DisplayName>
+      <Protocol Name="OpenIdConnect" />
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="email" />
+        <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub"/>
+      </OutputClaims>
+      <SubjectNamingInfo ClaimType="sub" />
+    </TechnicalProfile>
   </RelyingParty>
 
 </TrustFrameworkPolicy>

@@ -5,8 +5,8 @@
   xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
   PolicySchemaVersion="0.3.0.0"
   TenantId="[TENANT]"
-  PolicyId="B2C_1A_SignInMemberNumber"
-  PublicPolicyUri="[TENANT]/B2C_1A_SignInMemberNumber">
+  PolicyId="B2C_1A_SignInMemberNumber_[INICIALES]"
+  PublicPolicyUri="[TENANT]/B2C_1A_SignInMemberNumber_[INICIALES]">
 
   <BasePolicy>
     <TenantId>[TENANT]</TenantId>

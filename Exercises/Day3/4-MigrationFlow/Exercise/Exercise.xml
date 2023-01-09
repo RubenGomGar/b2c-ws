@@ -20,12 +20,6 @@
         <DataType>boolean</DataType>
         <UserHelpText />
       </ClaimType>
-      <ClaimType Id="saveUserBody">
-        <DisplayName>Json</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Json</AdminHelpText>
-        <UserHelpText>Json</UserHelpText>
-      </ClaimType>
     </ClaimsSchema>
     <ClaimsTransformations>
       <!-- Copy the SignInName claim to the Email Claim -->
@@ -178,10 +172,7 @@
 <UserJourneys>
     <UserJourney Id="CustomSignIn">
       <OrchestrationSteps>
-        <OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
-          <ClaimsProviderSelections>
-            <ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
-          </ClaimsProviderSelections>
+        <OrchestrationStep Order="1" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
           </ClaimsExchanges>
