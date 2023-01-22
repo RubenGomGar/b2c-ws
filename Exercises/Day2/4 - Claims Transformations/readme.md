@@ -25,7 +25,7 @@ A partir de este fichero, vamos a modificarlo para conseguir lo siguiente:
 - Creamos una transformación para negar el claim `isAgeOver21Years` (`NotClaims`).
 
 
-Para ello copiamos el fichero `base.xml` a otra ubicación o la misma con diferente nombre (p.ej. `exercise_day2_3.xml`).
+Para ello copiamos el fichero `base.xml` a otra ubicación o la misma con diferente nombre (p.ej. `exercise_day2_4.xml`).
 Abrimos el fichero en un editor y seguimos los siguientes pasos:
 
 1. Añadimos todos los `ClaimType` anteriores de la misma forma que los añadimos en el ejercicio anterior ([documentación asociada](https://learn.microsoft.com/en-us/azure/active-directory-b2c/claimsschema)).
