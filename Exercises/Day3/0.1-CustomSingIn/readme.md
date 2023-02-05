@@ -13,42 +13,42 @@ Deberemos rellenar nuestro user Journey con los siguientes steps:
 
 
 <details>
-   <summary>STEP 1 SPOLIER</summary>
+   <summary>STEP 1 SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="1" Type="ClaimsExchange">
-          <ClaimsExchanges>
-              <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-    ```
+```xml
+    <OrchestrationStep Order="1" Type="ClaimsExchange">
+        <ClaimsExchanges>
+            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+        </ClaimsExchanges>
+    </OrchestrationStep>
+```
 
    </div>
 </details>
 
 <details>
-   <summary>STEP 2 SPOLIER</summary>
+   <summary>STEP 2 SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="2" Type="ClaimsExchange">
-          <ClaimsExchanges>
-              <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-    ```
+```xml
+    <OrchestrationStep Order="2" Type="ClaimsExchange">
+        <ClaimsExchanges>
+            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+        </ClaimsExchanges>
+    </OrchestrationStep>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>STEP 1 SPOLIER</summary>
+   <summary>STEP 1 SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-    ```
+```xml
+    <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+```
     
    </div>
 </details>

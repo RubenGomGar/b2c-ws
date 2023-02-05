@@ -10,7 +10,10 @@ Create a JSON single element array from the `string1` claim value. The unit test
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **CreateJsonPayload** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_CreateJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_CreateJsonArray.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#createjsonarray)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_CreateJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_CreateJsonArray.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#createjsonarray)
 
 ## GenerateJson
 
@@ -20,7 +23,10 @@ Use the `boolean1`, `dateTime1`, `int1`, `long1` and `string1` claims and consta
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **GenerateJsonPayload** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GenerateJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GenerateJson.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#generatejson)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GenerateJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GenerateJson.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#generatejson)
 
 ## GetClaimFromJson
 
@@ -30,7 +36,10 @@ Gets the displayName (`resultDisplayName` claim), email (`resultEmail` claim), g
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **GetDisplayNameClaimFromJson**, **GetEmailClaimFromJson**, **GetGivenNameClaimFromJson**, **GetSurnameClaimFromJson** claims transformations - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetClaimFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetClaimFromJson.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getclaimfromjson)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetClaimFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetClaimFromJson.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getclaimfromjson)
 
 ## GetClaimsFromJsonArray
 
@@ -44,7 +53,10 @@ Get the `displayName` (string), `membershipID` (int), `active` (boolean), and `b
   - **GetClaimsFromJsonDontIncludeEmptyClaims** claims transformation - the increment unit test.
   - **GetClaimsFromJsonIncludeEmptyClaims** claims transformation - the decrement unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetClaimsFromJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetClaimsFromJsonArray.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getclaimsfromjsonarray)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetClaimsFromJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetClaimsFromJsonArray.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getclaimsfromjsonarray)
 
 ## GetNumericClaimFromJson
 
@@ -54,7 +66,10 @@ Gets the **id** element from a JSON data. The result of this unit test is the `r
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **GetIdFromJson** claims transformations - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetNumericClaimFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetNumericClaimFromJson.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getnumericclaimfromjson)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetNumericClaimFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetNumericClaimFromJson.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getnumericclaimfromjson)
 
 ## GetSingleItemFromJson
 
@@ -64,7 +79,10 @@ Gets the first element key (`resultKey` claim) and value (`resultValue` claim) f
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **GetKeyValueFromJson** claims transformations - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetSingleItemFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetSingleItemFromJson.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getsingleitemfromjson)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetSingleItemFromJson/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetSingleItemFromJson.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getsingleitemfromjson)
 
 ## GetSingleValueFromJsonArray
 
@@ -74,7 +92,10 @@ Gets the first element from a JSON data array (`inputJson` claim). The result of
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **GetFirstItemFromJson** claims transformations - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetSingleValueFromJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetSingleValueFromJsonArray.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getsinglevaluefromjsonarray)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetSingleValueFromJsonArray/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetSingleValueFromJsonArray.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#getsinglevaluefromjsonarray)
 
 
 ## XmlStringToJsonString
@@ -85,4 +106,7 @@ Converts the XML data (`inputXML` claim) to JSON format.  The result of this uni
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **ConvertXmlToJson** claims transformations - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_XmlStringToJsonString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_XmlStringToJsonString.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#xmlstringtojsonstring)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_XmlStringToJsonString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_XmlStringToJsonString.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/json-transformations#xmlstringtojsonstring)

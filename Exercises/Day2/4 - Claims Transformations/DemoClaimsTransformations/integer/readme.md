@@ -14,7 +14,10 @@ Increases or decreases the `int1` numeric claim. The result of this unit test is
   - **increaseInt** claims transformation - the increment unit test.
   - **increaseInt** claims transformation - the decrement unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_AdjustNumber/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_AdjustNumber.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/integer-transformations#adjustnumber)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_AdjustNumber/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_AdjustNumber.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/integer-transformations#adjustnumber)
 
 ## AssertNumber
 
@@ -36,7 +39,10 @@ Determines whether the `int1` numeric claim is greater, lesser, equal, or not eq
   - **AssertNumberIsLessThanOrEqual** claims transformation - the less than or equal unit test.
   - **AssertNumberIsNotEqual** claims transformation - the not equal unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_AssertNumber/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_AssertNumber.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/integer-transformations#assertnumber)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_AssertNumber/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_AssertNumber.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/integer-transformations#assertnumber)
 
 
 ## ConvertNumberToStringClaim
@@ -47,4 +53,7 @@ Converts the `long1` claim (long data type() into the `result` string data type.
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **ConvertIntToString** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertNumberToStringClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_ConvertNumberToStringClaim.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/string-transformations#convertnumbertostringclaim)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertNumberToStringClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_ConvertNumberToStringClaim.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/string-transformations#convertnumbertostringclaim)

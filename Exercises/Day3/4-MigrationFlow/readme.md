@@ -86,184 +86,184 @@ El flujo debería estar comupesto por la siguiente lógica
     - STEP 2: Enviamos las claims
 
 <details>
-   <summary>Creamos una claim para saber si el usuario es local: SPOLIER</summary>
+   <summary>Creamos una claim para saber si el usuario es local: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="isLocalUser">
-        <DisplayName>isLocalUser</DisplayName>
-        <DataType>boolean</DataType>
-        <UserHelpText />
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="isLocalUser">
+    <DisplayName>isLocalUser</DisplayName>
+    <DataType>boolean</DataType>
+    <UserHelpText />
+  </ClaimType>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim transformation que copie la claim de email: SPOLIER</summary>
+   <summary>Creamos una claim transformation que copie la claim de email: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimsTransformation Id="copyEmailFromSignin" TransformationMethod="CopyClaim">
-        <InputClaims>
-          <InputClaim ClaimTypeReferenceId="signInName" TransformationClaimType="inputClaim" />
-        </InputClaims>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="outputClaim" />
-        </OutputClaims>
-      </ClaimsTransformation>
-    ```
+```xml
+  <ClaimsTransformation Id="copyEmailFromSignin" TransformationMethod="CopyClaim">
+    <InputClaims>
+      <InputClaim ClaimTypeReferenceId="signInName" TransformationClaimType="inputClaim" />
+    </InputClaims>
+    <OutputClaims>
+      <OutputClaim ClaimTypeReferenceId="email" TransformationClaimType="outputClaim" />
+    </OutputClaims>
+  </ClaimsTransformation>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile que valide la autenticación remota: SPOLIER</summary>
+   <summary>Creamos un technical profile que valide la autenticación remota: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="login-Remote">
-          <DisplayName>Remote Account SignIn</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/remote-login</Item>
-            <Item Key="AuthenticationType">None</Item>
-            <Item Key="SendClaimsIn">Header</Item>
-            <Item Key="AllowInsecureAuthInProduction">true</Item>
-            <Item Key="DefaultUserMessageIfRequestFailed">Invalid Remote User Login.</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="signInName" Required="true" />
-            <InputClaim ClaimTypeReferenceId="password" Required="true" />
-          </InputClaims>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
-            <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="displayName" />
-            <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="name" />
-            <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="surname" />
-          </OutputClaims>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-        <TechnicalProfile Id="Create-RemoteUserLocally">
-          <DisplayName>Create Remote Account Locally</DisplayName>
-          <InputClaimsTransformations>
-            <InputClaimsTransformation ReferenceId="copyEmailFromSignin" />
-          </InputClaimsTransformations>
-          <PersistedClaims>
-            <PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password" />
-          </PersistedClaims>            
-          <IncludeTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="login-Remote">
+      <DisplayName>Remote Account SignIn</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/remote-login</Item>
+        <Item Key="AuthenticationType">None</Item>
+        <Item Key="SendClaimsIn">Header</Item>
+        <Item Key="AllowInsecureAuthInProduction">true</Item>
+        <Item Key="DefaultUserMessageIfRequestFailed">Invalid Remote User Login.</Item>
+      </Metadata>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="signInName" Required="true" />
+        <InputClaim ClaimTypeReferenceId="password" Required="true" />
+      </InputClaims>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+        <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="name" />
+        <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="surname" />
+      </OutputClaims>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+    <TechnicalProfile Id="Create-RemoteUserLocally">
+      <DisplayName>Create Remote Account Locally</DisplayName>
+      <InputClaimsTransformations>
+        <InputClaimsTransformation ReferenceId="copyEmailFromSignin" />
+      </InputClaimsTransformations>
+      <PersistedClaims>
+        <PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password" />
+      </PersistedClaims>            
+      <IncludeTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+    </TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile que valide si el usuario existe en nuestro AAD: SPOLIER</summary>
+   <summary>Creamos un technical profile que valide si el usuario existe en nuestro AAD: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="AAD-UserExists">
-          <Metadata>
-            <Item Key="Operation">Read</Item>
-            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
-          </Metadata>
-          <IncludeInSso>false</IncludeInSso>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="signInNames.emailAddress" Required="true" />
-          </InputClaims>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="isLocalUser" DefaultValue="true" AlwaysUseDefaultValue="true" />
-          </OutputClaims>
-          <IncludeTechnicalProfile ReferenceId="AAD-Common" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="AAD-UserExists">
+      <Metadata>
+        <Item Key="Operation">Read</Item>
+        <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+      </Metadata>
+      <IncludeInSso>false</IncludeInSso>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="signInNames.emailAddress" Required="true" />
+      </InputClaims>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="isLocalUser" DefaultValue="true" AlwaysUseDefaultValue="true" />
+      </OutputClaims>
+      <IncludeTechnicalProfile ReferenceId="AAD-Common" />
+    </TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile que escriba el usuario en el AAD: SPOLIER</summary>
+   <summary>Creamos un technical profile que escriba el usuario en el AAD: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="Create-RemoteUserLocally">
-          <DisplayName>Create Remote Account Locally</DisplayName>
-          <InputClaimsTransformations>
-            <InputClaimsTransformation ReferenceId="copyEmailFromSignin" />
-          </InputClaimsTransformations>
-          <PersistedClaims>
-            <PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password" />
-          </PersistedClaims>            
-          <IncludeTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="Create-RemoteUserLocally">
+      <DisplayName>Create Remote Account Locally</DisplayName>
+      <InputClaimsTransformations>
+        <InputClaimsTransformation ReferenceId="copyEmailFromSignin" />
+      </InputClaimsTransformations>
+      <PersistedClaims>
+        <PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password" />
+      </PersistedClaims>            
+      <IncludeTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+    </TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Consumimos el technical profile `SelfAsserted-LocalAccountSignin-Email` para añadir validaciones nuevas: SPOLIER</summary>
+   <summary>Consumimos el technical profile `SelfAsserted-LocalAccountSignin-Email` para añadir validaciones nuevas: SPOILER</summary>
    <div class="description">
 
-    ```xml
+```xml
 <TechnicalProfile Id="SelfAsserted-LocalAccountSignin-Email">
-          <DisplayName>Local Account Signin</DisplayName>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="isLocalUser" />
-          </OutputClaims>
-          <ValidationTechnicalProfiles>
-            <ValidationTechnicalProfile ReferenceId="AAD-UserExists" ContinueOnError="true" ContinueOnSuccess="true" />
-            <!-- If 'isLocalUser' equals 'True' Login Locally -->
-            <ValidationTechnicalProfile ReferenceId="login-NonInteractive">
-              <Preconditions>
-                <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-                  <Value>isLocalUser</Value>
-                  <Action>SkipThisValidationTechnicalProfile</Action>
-                </Precondition>
-              </Preconditions>
-            </ValidationTechnicalProfile>
-            <!-- If 'isLocalUser' equals 'False' Login Remotely (Migrate User) -->
-            <ValidationTechnicalProfile ReferenceId="login-Remote">
-              <Preconditions>
-                <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
-                  <Value>isLocalUser</Value>
-                  <Action>SkipThisValidationTechnicalProfile</Action>
-                </Precondition>
-              </Preconditions>
-            </ValidationTechnicalProfile>
-            <!-- Set to Continue on success - false so as not rto try to re-apply login-Noninteractive from inhertance -->
-            <ValidationTechnicalProfile ReferenceId="Create-RemoteUserLocally" ContinueOnSuccess="false"> 
-              <Preconditions>
-                <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-                  <Value>isLocalUser</Value>
-                  <Value>True</Value>
-                  <Action>SkipThisValidationTechnicalProfile</Action>
-                </Precondition>
-              </Preconditions>
-            </ValidationTechnicalProfile>
-          </ValidationTechnicalProfiles>
-        </TechnicalProfile>
-    ```
+      <DisplayName>Local Account Signin</DisplayName>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="isLocalUser" />
+      </OutputClaims>
+      <ValidationTechnicalProfiles>
+        <ValidationTechnicalProfile ReferenceId="AAD-UserExists" ContinueOnError="true" ContinueOnSuccess="true" />
+        <!-- If 'isLocalUser' equals 'True' Login Locally -->
+        <ValidationTechnicalProfile ReferenceId="login-NonInteractive">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+              <Value>isLocalUser</Value>
+              <Action>SkipThisValidationTechnicalProfile</Action>
+            </Precondition>
+          </Preconditions>
+        </ValidationTechnicalProfile>
+        <!-- If 'isLocalUser' equals 'False' Login Remotely (Migrate User) -->
+        <ValidationTechnicalProfile ReferenceId="login-Remote">
+          <Preconditions>
+            <Precondition Type="ClaimsExist" ExecuteActionsIf="true">
+              <Value>isLocalUser</Value>
+              <Action>SkipThisValidationTechnicalProfile</Action>
+            </Precondition>
+          </Preconditions>
+        </ValidationTechnicalProfile>
+        <!-- Set to Continue on success - false so as not rto try to re-apply login-Noninteractive from inhertance -->
+        <ValidationTechnicalProfile ReferenceId="Create-RemoteUserLocally" ContinueOnSuccess="false"> 
+          <Preconditions>
+            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+              <Value>isLocalUser</Value>
+              <Value>True</Value>
+              <Action>SkipThisValidationTechnicalProfile</Action>
+            </Precondition>
+          </Preconditions>
+        </ValidationTechnicalProfile>
+      </ValidationTechnicalProfiles>
+    </TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Añadimos los steps de nuestra User Journey: SPOLIER</summary>
+   <summary>Añadimos los steps de nuestra User Journey: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="1" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
-          in the token. -->
-        <OrchestrationStep Order="2" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
+```xml
+    <OrchestrationStep Order="1" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+    <!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
+      in the token. -->
+    <OrchestrationStep Order="2" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
 
-        <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-    ```
+    <OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+```
    </div>
 </details>

@@ -1,0 +1,49 @@
+site_name: Azure B2C Workshop
+nav:
+    - Inicio: index.md
+    - Day 1 - Tenant: Day1\0 - Tenant\readme.md
+    - Day 1 - App Registry: Day1\1 - App registry\readme.md
+    - Day 1 - User Flows: Day1\2 - User flows\readme.md
+    - Day 1 - Login to Azure B2C: Day1\3 - Login to Azure B2C\readme.md
+    - Day 1 - Add OIDC Provider: Day1\4 - Add OIDC Provider\readme.md
+    - Day 1 - Custom user attributes: Day1\5 - Custom user attributes\readme.md
+    - Day 1 - Custom branding: Day1\6 - Custom branding\readme.md
+    - Day 1 - Managing users: Day1\7 - Managing users\readme.md
+    - Day 1 - Api Connectors: Day1\8 - Api connectors\readme.md
+    - Day 2 - Installation: Day2\1 - Instalation\readme.md
+    - Day 2 - Installation - Local Accounts Policy: Day2\1 - Instalation\LocalAccountsPolicy\readme.md
+    - Day 2 - Base Structure: Day2\2 - Base Structure\readme.md
+    - Day 2 - Base Structure - Local Accounts Policy App Insights: Day2\2 - Base Structure\LocalAccountsPolicyAppInsights\readme.md
+    - Day 2 - Claims: Day2\3 - Claims\readme.md
+    - Day 2 - Claims Transformations: Day2\4 - Claims Transformations\readme.md
+    - Day 2 - Claims Transformations (boolean): Day2\4 - Claims Transformations\DemoClaimsTransformations\boolean\readme.md
+    - Day 2 - Claims Transformations (date): Day2\4 - Claims Transformations\DemoClaimsTransformations\date\readme.md
+    - Day 2 - Claims Transformations (general): Day2\4 - Claims Transformations\DemoClaimsTransformations\general\readme.md
+    - Day 2 - Claims Transformations (integer): Day2\4 - Claims Transformations\DemoClaimsTransformations\integer\readme.md
+    - Day 2 - Claims Transformations (json): Day2\4 - Claims Transformations\DemoClaimsTransformations\json\readme.md
+    - Day 2 - Claims Transformations (phoneNumber): Day2\4 - Claims Transformations\DemoClaimsTransformations\phoneNumber\readme.md
+    - Day 2 - Claims Transformations (social): Day2\4 - Claims Transformations\DemoClaimsTransformations\social\readme.md
+    - Day 2 - Claims Transformations (string): Day2\4 - Claims Transformations\DemoClaimsTransformations\string\readme.md
+    - Day 2 - Claims Transformations (stringCollection): Day2\4 - Claims Transformations\DemoClaimsTransformations\stringCollection\readme.md
+    - Day 2 - Content Definitions: Day2\5 - ContentDefinitions\readme.md
+    - Day 2 - Localizations: Day2\6 - Localizations\readme.md
+    - Day 2 - Display Controls: Day2\7 - Display Controls\readme.md
+    - Day 2 - Technical Profiles: Day2\8 - Technical Profiles\readme.md
+    - Day 2 - User Journeys: Day2\9 - User Journeys\readme.md
+    - Day 2 - SubJourneys: Day2\10 - SubJourneys\readme.md
+    - Day 2 - Relying Party: Day2\11 - Relying Party\readme.md
+    - Day 2 - Claims Resolver: Day2\12 - Claims Resolver\readme.md
+    - Day 3 - Base: Day3\0-Base\readme.md
+    - Day 3 - Custom Sign-In: Day3\0.1-CustomSingIn\readme.md
+    - Day 3 - Custom Sign-Up: Day3\0.2-CustomSignUp\readme.md
+    - Day 3 - Customize User Input: Day3\1-CustomizeUserInput\readme.md
+    - Day 3 - Sign-In Member Number: Day3\2-SigninMemberNumber\readme.md
+    - Day 3 - First Login Flow: Day3\3-FirstLoginFlow\readme.md
+    - Day 3 - Migration Flow: Day3\4-MigrationFlow\readme.md
+    - Day 3 - Sameless Migration: Day3\5-SamelessMigrations\readme.md
+    - Day 3 - MultiBrandFlow: Day3\6-MultiBrandFlow\readme.md
+theme:
+  name: readthedocs
+  highlightjs: true
+
+docs_dir: Exercises

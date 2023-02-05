@@ -37,20 +37,21 @@ Tenemos que tener en cuenta que su `<DataType>` tendra que ser de tipo `string` 
 
 7. Tras establecer cada predicado por separado, siempre tendremos que tener un nodo `PredicateValidations` tras `Predicates` que siga la siguiente estructura:
 
-    ```xml
-    <PredicateValidations>
-        <PredicateValidation Id="{{CustomID}}">
-            <PredicateGroups>
-                <PredicateGroup Id="{{CustomGroupID}}">
-                <PredicateReferences>
-                    <PredicateReference Id="{{ReferenceID}}" />
-                </PredicateReferences>
-                </PredicateGroup>
-            </PredicateGroups>
-        </PredicateValidation>
-    </PredicateValidations>
-    ```
-    De este modo crearemos un nodo `PredicateValidation` con al menos una referencia para luego utilizarlos en nuestros `ClaimType` ([documentación de referencia](https://learn.microsoft.com/en-us/azure/active-directory-b2c/predicates)).
+```xml
+<PredicateValidations>
+    <PredicateValidation Id="{{CustomID}}">
+        <PredicateGroups>
+            <PredicateGroup Id="{{CustomGroupID}}">
+            <PredicateReferences>
+                <PredicateReference Id="{{ReferenceID}}" />
+            </PredicateReferences>
+            </PredicateGroup>
+        </PredicateGroups>
+    </PredicateValidation>
+</PredicateValidations>
+```
+
+De este modo crearemos un nodo `PredicateValidation` con al menos una referencia para luego utilizarlos en nuestros `ClaimType` ([documentación de referencia](https://learn.microsoft.com/en-us/azure/active-directory-b2c/predicates)).
 
 8. Tras haber definido toda la estructura de `PredicateValidations` debemos de iterar cada uno de los `ClaimType` y añadir un nodo al final del tipo `PredicateValidationReference` con un `Id` que haga referencia a un `PredicateValidation`. Al hacer esto, estaremos asociando a nuestros claims grupos de predicados y así añadiendo nuestras validaciones y restricciones.
 

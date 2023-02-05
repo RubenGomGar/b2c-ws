@@ -10,7 +10,10 @@ Converts the `inputPhoneNumber` (phoneNumber data type) into the `result` (strin
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 - **PhoneNumberToString** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertPhoneNumberClaimToString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_ConvertPhoneNumberClaimToString.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertphonenumberclaimtostring)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertPhoneNumberClaimToString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_ConvertPhoneNumberClaimToString.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertphonenumberclaimtostring)
 
 ## ConvertStringToPhoneNumberClaim
 
@@ -22,7 +25,10 @@ The unit test defines the following elements:
 - **ExperimentalValidation** - [claims transformation](https://docs.microsoft.com/azure/active-directory-b2c/claims-transformation-technical-profile) type of [validation technical profile](https://docs.microsoft.com/azure/active-directory-b2c/validation-technical-profile). This validation technical profile invokes the **ConvertStringToPhoneNumberWithCountryCode** claims transformation, which runs the unit test.
 - **ConvertStringToPhoneNumberWithCountryCode** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertStringToPhoneNumberClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_ConvertStringToPhoneNumberClaim.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertstringtophonenumberclaim)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertStringToPhoneNumberClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_ConvertStringToPhoneNumberClaim.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertstringtophonenumberclaim)
 
 ## ConvertStringToPhoneNumberClaim without country code claim
 
@@ -34,7 +40,10 @@ The unit test defines the following elements:
 - **ExperimentalValidation** - [claims transformation](https://docs.microsoft.com/azure/active-directory-b2c/claims-transformation-technical-profile) type of [validation technical profile](https://docs.microsoft.com/azure/active-directory-b2c/validation-technical-profile). This validation technical profile invokes the **ConvertStringToPhoneNumberWithoutCountryCode** claims transformation, which runs the unit test.
 - **ConvertStringToPhoneNumberWithoutCountryCode** claims transformation - the unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertStringToPhoneNumberClaim_WithoutCountryCodeClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_ConvertStringToPhoneNumberClaimWithoutCountryCodeClaim.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertstringtophonenumberclaim)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_ConvertStringToPhoneNumberClaim_WithoutCountryCodeClaim/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_ConvertStringToPhoneNumberClaimWithoutCountryCodeClaim.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#convertstringtophonenumberclaim)
 
 ## GetNationalNumberAndCountryCodeFromPhoneNumberString
 
@@ -49,4 +58,7 @@ Extracts the country/region code and the national number from the input `phoneNu
   - **GetNationalNumberAndCountryCodeCallingCodeFormat** claims transformation - the unit test.
 - **ResultTechnicalProfile** - [self-asserted](https://docs.microsoft.com/azure/active-directory-b2c/self-asserted-technical-profile) technical profile. This technical profile shows the `result` of this unit test.
 
-![live demo](../../media/demo.png) [Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetNationalNumberAndCountryCodeFromPhoneNumberString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login) &nbsp; ![Quick deploy](../../media/deploy.png) [Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)  &nbsp; ![policy](../../media/policy.png) [Policy](CT_GetNationalNumberAndCountryCodeFromPhoneNumberString.xml) &nbsp;  ![documentation](../../media/doc.png) [Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#getnationalnumberandcountrycodefromphonenumberstring)
+[Live demo](https://b2clivedemo.b2clogin.com/b2clivedemo.onmicrosoft.com/B2C_1A_CT_GetNationalNumberAndCountryCodeFromPhoneNumberString/oauth2/v2.0/authorize?client_id=cfaf887b-a9db-4b44-ac47-5efff4e2902c&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login)
+[Quick deploy](https://b2ciefsetupapp.azurewebsites.net/)
+[Policy](CT_GetNationalNumberAndCountryCodeFromPhoneNumberString.xml)
+[Documentation](https://docs.microsoft.com/azure/active-directory-b2c/phone-number-claims-transformations#getnationalnumberandcountrycodefromphonenumberstring)

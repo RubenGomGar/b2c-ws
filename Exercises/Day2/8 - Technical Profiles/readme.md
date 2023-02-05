@@ -31,29 +31,34 @@ Bajo el Technical Profile (en adelante TP) con identificador `ReadUserId`:
   - Name: Correspondiente a un protocolo válido soportado por B2C para ser usado en la TP (OAuth2, SAML2, OpenIdConnect, Propietary o None). En este caso el valor es `Propietary`, indicando que no se va a usar un proveedor externo sino que se va a llamar al ensamblado .NET.
   - Handler: Al usar un protocolo `Propietary`, el parámetro handler especifica el nombre del ensamblado a utilizar. En este caso utilizamos el valor `Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null`.
   - La sección Protocol ha que ser:
-  ```xml
+
+```xml
 <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-  ```
+```
+
 3. Definimos los metadatos de la ventana bajo la sección `Metadata` mediante una lista de objetos/items:
   - Especificamos la interfaz de usuario definiendo un `ContentDefinitionReferenceId` con valor `api.selfasserted` (Utilizando la interfaz por defecto de B2C)
   - Ocultamos el botón cancelar ya que no queremos habilitar esta posibilidad mediante `setting.showCancelButton` con valor `false`
   - La sección `Metadata` ha de quedar:
-  ```xml
-    <Metadata>
-        <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
-        <Item Key="setting.showCancelButton">false</Item>
-    </Metadata>
-  ```
+  
+```xml
+  <Metadata>
+      <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+      <Item Key="setting.showCancelButton">false</Item>
+  </Metadata>
+```
+
 4. Indicamos el contenido a mostrar dentro de la ventana mediante la sección `OutputClaims`:
   - Mostramos el mensaje de ayuda utilizando el claim `userId_required`
   - Colocamos el input para leer el UserId mediante el claim `extension_userId` (El tipo de control a mostrar lo se define en la declaración del claim)
   - La sección `OutputClaims` ha de ser:
-  ```xml
-    <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="userId_required" />
-        <OutputClaim ClaimTypeReferenceId="extension_userId" />
-    </OutputClaims>
-  ```
+  
+```xml
+  <OutputClaims>
+      <OutputClaim ClaimTypeReferenceId="userId_required" />
+      <OutputClaim ClaimTypeReferenceId="extension_userId" />
+  </OutputClaims>
+```
 
 5. Declaramos la transformación de claims para generar el claim con el JSON válido para llamar a la validación del UserId mediante la sección `OutputClaimsTransformation` haciendo referencia a la transformación de claims definida al inicio del ejercicio `GenerateValidateUserIdBody`
 
@@ -73,16 +78,18 @@ Bajo el Technical Profile (en adelante TP) con identificador `ValidateUserId`:
   - DefaultUserMessageIfRequestFailed - Añadimos un texto descriptivo a mostrar si la petición es erronea
   - ClaimUsedForRequestPayload - hacemos referencia al claim que contiene el payload en JSON usado en la transformación de claims `validateUserIdBody`
   - La sección de metadatos será:
-  ```xml
-  <Metadata>
-    <Item Key="ServiceUrl">https://b2cworkshopuseridvalidator.azurewebsites.net/api/Function1?code=tAS7CynrLodu3R__6WimYarBdxnfoasf5Zhnqulju5KTAzFuRexqcg==</Item>
-    <Item Key="AuthenticationType">Basic</Item>
-    <Item Key="SendClaimsIn">Body</Item>
-    <Item Key="AllowInsecureAuthInProduction">false</Item>
-    <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
-    <Item Key="ClaimUsedForRequestPayload">validateUserIdBody</Item>
-  </Metadata>
-  ```
+
+```xml
+<Metadata>
+  <Item Key="ServiceUrl">https://b2cworkshopuseridvalidator.azurewebsites.net/api/Function1?code=tAS7CynrLodu3R__6WimYarBdxnfoasf5Zhnqulju5KTAzFuRexqcg==</Item>
+  <Item Key="AuthenticationType">Basic</Item>
+  <Item Key="SendClaimsIn">Body</Item>
+  <Item Key="AllowInsecureAuthInProduction">false</Item>
+  <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
+  <Item Key="ClaimUsedForRequestPayload">validateUserIdBody</Item>
+</Metadata>
+```
+
 4. Al usar una autenticación del tipo `Basic`, es necesario proporcionar el usuario y password a utilizar. Estos valores se introducen desde el portal de Azure B2C, bajo la sección `PolicyKeys` de `IdentityExperienceFramework`. Una vez en esa sección:
   - Seleccionamos el botón `Add`
   - Como opciones de generación seleccionamos `Manual` para introducir el valor manualmente (con valor `admin`)
@@ -95,12 +102,14 @@ Bajo el Technical Profile (en adelante TP) con identificador `ValidateUserId`:
   - BasicAuthenticationUsername - con valor `B2C_1A_SigninWValidatorValidateUserIdUsername`
   - BasicAuthenticationPassword - con valor `B2C_1A_SigninWValidatorValidateUserIdUsername`
   - La sección `CryptographicKeys` sera:
-  ```xml
-  <CryptographicKeys>
-    <Key Id="BasicAuthenticationUsername" StorageReferenceId="B2C_1A_SigninWValidatorValidateUserIdUsername" />
-    <Key Id="BasicAuthenticationPassword" StorageReferenceId="B2C_1A_SigninWValidatorValidateUserIdPassword" />
-  </CryptographicKeys>
-  ```
+
+```xml
+<CryptographicKeys>
+  <Key Id="BasicAuthenticationUsername" StorageReferenceId="B2C_1A_SigninWValidatorValidateUserIdUsername" />
+  <Key Id="BasicAuthenticationPassword" StorageReferenceId="B2C_1A_SigninWValidatorValidateUserIdPassword" />
+</CryptographicKeys>
+```
+
 6. Como claims de entrada, haremos referencia al claim que contiene el payload en formato json `validateUserIdBody`
 7. Como claim de salida recuperaremos si el UserId ha sido válido o no. En este caso tendremos que declarar como se realiza el mapeo entre la respuesta y los claims correspondientes:
 - Indicamos que el claim de salida es `extension_isValidUser`

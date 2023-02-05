@@ -125,127 +125,127 @@ Para construir el flujo necesitaríamos los siguientes pasos:
 
 
 <details>
-   <summary>Creamos una claim para el Nº de socio: SPOLIER</summary>
+   <summary>Creamos una claim para el Nº de socio: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="extension_MemberNumber">
-        <DisplayName>Número de socio</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Número de socio</AdminHelpText>
-        <UserHelpText>Número de socio</UserHelpText>
-        <UserInputType>TextBox</UserInputType>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="extension_MemberNumber">
+    <DisplayName>Número de socio</DisplayName>
+    <DataType>string</DataType>
+    <AdminHelpText>Número de socio</AdminHelpText>
+    <UserHelpText>Número de socio</UserHelpText>
+    <UserInputType>TextBox</UserInputType>
+  </ClaimType>
+```
 
    </div>
 </details>
 
 <details>
-   <summary>Creamos la claim para el mensaje requerido de número de socio: SPOLIER</summary>
+   <summary>Creamos la claim para el mensaje requerido de número de socio: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="MemberNumber_required">
-        <DisplayName>De cara a completar el proceso de registro, es necesario validar tu identidad. Por favor introduce tu Número de socio a continuación</DisplayName>
-        <DataType>string</DataType>
-        <UserInputType>Paragraph</UserInputType>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="MemberNumber_required">
+    <DisplayName>De cara a completar el proceso de registro, es necesario validar tu identidad. Por favor introduce tu Número de socio a continuación</DisplayName>
+    <DataType>string</DataType>
+    <UserInputType>Paragraph</UserInputType>
+  </ClaimType>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos la claim para el mensaje de error de validación de número de socio: SPOLIER</summary>
+   <summary>Creamos la claim para el mensaje de error de validación de número de socio: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="MemberNumber_ValidationError">
-        <DisplayName>El número de socio no está en el sistema. Reviselo y vuelva a intentarlo</DisplayName>
-        <DataType>string</DataType>
-        <UserInputType>Paragraph</UserInputType>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="MemberNumber_ValidationError">
+    <DisplayName>El número de socio no está en el sistema. Reviselo y vuelva a intentarlo</DisplayName>
+    <DataType>string</DataType>
+    <UserInputType>Paragraph</UserInputType>
+  </ClaimType>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim de tipo json: SPOLIER</summary>
+   <summary>Creamos una claim de tipo json: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="validateUserBody">
-        <DisplayName>Json</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Json</AdminHelpText>
-        <UserHelpText>Json</UserHelpText>
-      </ClaimType> 
-    ```
+```xml
+  <ClaimType Id="validateUserBody">
+    <DisplayName>Json</DisplayName>
+    <DataType>string</DataType>
+    <AdminHelpText>Json</AdminHelpText>
+    <UserHelpText>Json</UserHelpText>
+  </ClaimType> 
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim transformation: SPOLIER</summary>
+   <summary>Creamos una claim transformation: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimsTransformation Id="GenerateValidateUserBody" TransformationMethod="GenerateJson">
-        <InputClaims>
-          <InputClaim ClaimTypeReferenceId="extension_MemberNumber" TransformationClaimType="MemberNumber"/>
-        </InputClaims>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="validateUserBody" TransformationClaimType="outputClaim"/>
-        </OutputClaims>
-      </ClaimsTransformation>
-    ```
+```xml
+  <ClaimsTransformation Id="GenerateValidateUserBody" TransformationMethod="GenerateJson">
+    <InputClaims>
+      <InputClaim ClaimTypeReferenceId="extension_MemberNumber" TransformationClaimType="MemberNumber"/>
+    </InputClaims>
+    <OutputClaims>
+      <OutputClaim ClaimTypeReferenceId="validateUserBody" TransformationClaimType="outputClaim"/>
+    </OutputClaims>
+  </ClaimsTransformation>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile: SPOLIER</summary>
+   <summary>Creamos un technical profile: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="ReadMemberNumber">
-          <DisplayName>Read Member Number</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
-            <Item Key="setting.showCancelButton">false</Item>
-          </Metadata>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="MemberNumber_required" />
-            <OutputClaim ClaimTypeReferenceId="extension_MemberNumber" />
-          </OutputClaims>
-          <OutputClaimsTransformations>
-            <OutputClaimsTransformation ReferenceId="GenerateValidateUserBody" />
-          </OutputClaimsTransformations>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="ReadMemberNumber">
+      <DisplayName>Read Member Number</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+        <Item Key="setting.showCancelButton">false</Item>
+      </Metadata>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="MemberNumber_required" />
+        <OutputClaim ClaimTypeReferenceId="extension_MemberNumber" />
+      </OutputClaims>
+      <OutputClaimsTransformations>
+        <OutputClaimsTransformation ReferenceId="GenerateValidateUserBody" />
+      </OutputClaimsTransformations>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos una userJourney: SPOLIER</summary>
+   <summary>Creamos una userJourney: SPOILER</summary>
    <div class="description">
 
-    ```xml
-    <UserJourney Id="SignInMemberNumber">
-      <OrchestrationSteps>
-        <OrchestrationStep Order="1" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="ReadMemberNumber" TechnicalProfileReferenceId="ReadMemberNumber" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-      </OrchestrationSteps>
-    </UserJourney>
-    ```
+```xml
+<UserJourney Id="SignInMemberNumber">
+  <OrchestrationSteps>
+    <OrchestrationStep Order="1" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="ReadMemberNumber" TechnicalProfileReferenceId="ReadMemberNumber" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+  </OrchestrationSteps>
+</UserJourney>
+```
     
    </div>
 </details>
@@ -282,103 +282,103 @@ Para construir el flujo necesitaríamos los siguientes pasos:
 
 
 <details>
-   <summary>Crearemos las claims necesarias: SPOLIER</summary>
+   <summary>Crearemos las claims necesarias: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="extension_isValidUser">
-        <DisplayName>Is Valid User</DisplayName>
-        <DataType>boolean</DataType>
-        <AdminHelpText>Is Valid User</AdminHelpText>
-        <UserHelpText>Is Valid User</UserHelpText>
-      </ClaimType> 
-    ```
+```xml
+  <ClaimType Id="extension_isValidUser">
+    <DisplayName>Is Valid User</DisplayName>
+    <DataType>boolean</DataType>
+    <AdminHelpText>Is Valid User</AdminHelpText>
+    <UserHelpText>Is Valid User</UserHelpText>
+  </ClaimType> 
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos el technical profile que llamará al api: SPOLIER</summary>
+   <summary>Creamos el technical profile que llamará al api: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="CUSTOM-ValidateMemeberUser">
-          <DisplayName>Get user data</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/validate-member-number</Item>
-            <Item Key="AuthenticationType">None</Item>
-            <Item Key="SendClaimsIn">Body</Item>
-            <Item Key="AllowInsecureAuthInProduction">true</Item>
-            <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
-            <Item Key="ClaimUsedForRequestPayload">validateUserBody</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="validateUserBody" />
-          </InputClaims>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="extension_isValidUser" PartnerClaimType="isValidUser" />
-          </OutputClaims>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="CUSTOM-ValidateMemeberUser">
+      <DisplayName>Get user data</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/validate-member-number</Item>
+        <Item Key="AuthenticationType">None</Item>
+        <Item Key="SendClaimsIn">Body</Item>
+        <Item Key="AllowInsecureAuthInProduction">true</Item>
+        <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
+        <Item Key="ClaimUsedForRequestPayload">validateUserBody</Item>
+      </Metadata>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="validateUserBody" />
+      </InputClaims>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="extension_isValidUser" PartnerClaimType="isValidUser" />
+      </OutputClaims>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos technical profile para mostrar un error cuando el usuario no sea válido: SPOLIER</summary>
+   <summary>Creamos technical profile para mostrar un error cuando el usuario no sea válido: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="ShowValidationError">
-          <DisplayName>Show Validation Error</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
-            <Item Key="setting.showContinueButton">false</Item>
-            <Item Key="setting.showCancelButton">false</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="MemberNumber_ValidationError"  DefaultValue="Error al validar el número de socio" AlwaysUseDefaultValue="true"/>
-          </InputClaims>
-          <DisplayClaims>
-            <DisplayClaim ClaimTypeReferenceId="MemberNumber_ValidationError" />
-          </DisplayClaims>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="ShowValidationError">
+      <DisplayName>Show Validation Error</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+        <Item Key="setting.showContinueButton">false</Item>
+        <Item Key="setting.showCancelButton">false</Item>
+      </Metadata>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="MemberNumber_ValidationError"  DefaultValue="Error al validar el número de socio" AlwaysUseDefaultValue="true"/>
+      </InputClaims>
+      <DisplayClaims>
+        <DisplayClaim ClaimTypeReferenceId="MemberNumber_ValidationError" />
+      </DisplayClaims>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Completamos nuestro UserJourney: SPOLIER</summary>
+   <summary>Completamos nuestro UserJourney: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="2" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="ValidateUser" TechnicalProfileReferenceId="CUSTOM-ValidateMemeberUser" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <OrchestrationStep Order="3" Type="ClaimsExchange">
-          <Preconditions>
-            <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
-              <Value>extension_isValidUser</Value>
-              <Action>SkipThisOrchestrationStep</Action>
-            </Precondition>
-            <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
-              <Value>extension_isValidUser</Value>
-              <Value>true</Value>
-              <Action>SkipThisOrchestrationStep</Action>
-            </Precondition>
-          </Preconditions>
-          <ClaimsExchanges>
-            <ClaimsExchange Id="ShowError" TechnicalProfileReferenceId="ShowValidationError" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-    ```
+```xml
+    <OrchestrationStep Order="2" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="ValidateUser" TechnicalProfileReferenceId="CUSTOM-ValidateMemeberUser" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+    <OrchestrationStep Order="3" Type="ClaimsExchange">
+      <Preconditions>
+        <Precondition Type="ClaimsExist" ExecuteActionsIf="false">
+          <Value>extension_isValidUser</Value>
+          <Action>SkipThisOrchestrationStep</Action>
+        </Precondition>
+        <Precondition Type="ClaimEquals" ExecuteActionsIf="true">
+          <Value>extension_isValidUser</Value>
+          <Value>true</Value>
+          <Action>SkipThisOrchestrationStep</Action>
+        </Precondition>
+      </Preconditions>
+      <ClaimsExchanges>
+        <ClaimsExchange Id="ShowError" TechnicalProfileReferenceId="ShowValidationError" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+```
     
    </div>
 </details>
@@ -411,85 +411,85 @@ Para construir el flujo necesitaríamos los siguientes pasos:
 
 
 <details>
-   <summary>Creamos una claim de tipo json para almacenar el json: SPOLIER</summary>
+   <summary>Creamos una claim de tipo json para almacenar el json: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="saveUserBody">
-        <DisplayName>Json</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Json</AdminHelpText>
-        <UserHelpText>Json</UserHelpText>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="saveUserBody">
+    <DisplayName>Json</DisplayName>
+    <DataType>string</DataType>
+    <AdminHelpText>Json</AdminHelpText>
+    <UserHelpText>Json</UserHelpText>
+  </ClaimType>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim transformation: SPOLIER</summary>
+   <summary>Creamos una claim transformation: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimsTransformation Id="GenerateSaveUserDataBody" TransformationMethod="GenerateJson">
-        <InputClaims>
-          <InputClaim ClaimTypeReferenceId="extension_MemberNumber" TransformationClaimType="MemberNumber"/>
-        </InputClaims>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="saveUserBody" TransformationClaimType="outputClaim"/>
-        </OutputClaims>
-      </ClaimsTransformation>
-    ```
+```xml
+  <ClaimsTransformation Id="GenerateSaveUserDataBody" TransformationMethod="GenerateJson">
+    <InputClaims>
+      <InputClaim ClaimTypeReferenceId="extension_MemberNumber" TransformationClaimType="MemberNumber"/>
+    </InputClaims>
+    <OutputClaims>
+      <OutputClaim ClaimTypeReferenceId="saveUserBody" TransformationClaimType="outputClaim"/>
+    </OutputClaims>
+  </ClaimsTransformation>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos el technical profile que llamará al api: SPOLIER</summary>
+   <summary>Creamos el technical profile que llamará al api: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="CUSTOM-SaveUserData">
-          <DisplayName>Get user data</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/save-user</Item>
-            <Item Key="AuthenticationType">None</Item>
-            <Item Key="SendClaimsIn">Body</Item>
-            <Item Key="AllowInsecureAuthInProduction">true</Item>
-            <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
-            <Item Key="ClaimUsedForRequestPayload">saveUserBody</Item>
-          </Metadata>
-          <InputClaimsTransformations>
-            <InputClaimsTransformation ReferenceId="GenerateSaveUserDataBody" />
-          </InputClaimsTransformations>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="saveUserBody" />
-          </InputClaims>
-          <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
-            <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="username" />
-            <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="name" />
-            <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="surname" />
-          </OutputClaims>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="CUSTOM-SaveUserData">
+      <DisplayName>Get user data</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/save-user</Item>
+        <Item Key="AuthenticationType">None</Item>
+        <Item Key="SendClaimsIn">Body</Item>
+        <Item Key="AllowInsecureAuthInProduction">true</Item>
+        <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
+        <Item Key="ClaimUsedForRequestPayload">saveUserBody</Item>
+      </Metadata>
+      <InputClaimsTransformations>
+        <InputClaimsTransformation ReferenceId="GenerateSaveUserDataBody" />
+      </InputClaimsTransformations>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="saveUserBody" />
+      </InputClaims>
+      <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="email" PartnerClaimType="email" />
+        <OutputClaim ClaimTypeReferenceId="displayName" PartnerClaimType="username" />
+        <OutputClaim ClaimTypeReferenceId="givenName" PartnerClaimType="name" />
+        <OutputClaim ClaimTypeReferenceId="surname" PartnerClaimType="surname" />
+      </OutputClaims>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Completamos nuestro UserJourney: SPOLIER</summary>
+   <summary>Completamos nuestro UserJourney: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="4" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="GetData" TechnicalProfileReferenceId="CUSTOM-SaveUserData" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-    ```
+```xml
+    <OrchestrationStep Order="4" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="GetData" TechnicalProfileReferenceId="CUSTOM-SaveUserData" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+```
     
    </div>
 </details>
@@ -562,177 +562,177 @@ Para construir el flujo necesitaríamos los siguientes pasos:
     - Step 8: Enviamos Claims
 
 <details>
-   <summary>Creamos una claim de tipo json para almacenar el json de entrada el api de envío de términos de uso: SPOLIER</summary>
+   <summary>Creamos una claim de tipo json para almacenar el json de entrada el api de envío de términos de uso: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="termsOfUseBody">
-        <DisplayName>Json</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Json</AdminHelpText>
-        <UserHelpText>Json</UserHelpText>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="termsOfUseBody">
+    <DisplayName>Json</DisplayName>
+    <DataType>string</DataType>
+    <AdminHelpText>Json</AdminHelpText>
+    <UserHelpText>Json</UserHelpText>
+  </ClaimType>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim para el valor de términos de uso: SPOLIER</summary>
+   <summary>Creamos una claim para el valor de términos de uso: SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="termsOfUse">
-        <DisplayName>Términos de uso</DisplayName>
-        <DataType>string</DataType>
-        <AdminHelpText>Términos de uso</AdminHelpText>
-        <UserHelpText>Términos de uso</UserHelpText>
-        <UserInputType>CheckboxMultiSelect</UserInputType>
-        <Restriction>
-          <Enumeration Text="Acepto los términos de uso" Value="AgreeToTermsOfUseConsentYes" SelectByDefault="false" />
-        </Restriction>
-      </ClaimType> 
-    ```
+```xml
+  <ClaimType Id="termsOfUse">
+    <DisplayName>Términos de uso</DisplayName>
+    <DataType>string</DataType>
+    <AdminHelpText>Términos de uso</AdminHelpText>
+    <UserHelpText>Términos de uso</UserHelpText>
+    <UserInputType>CheckboxMultiSelect</UserInputType>
+    <Restriction>
+      <Enumeration Text="Acepto los términos de uso" Value="AgreeToTermsOfUseConsentYes" SelectByDefault="false" />
+    </Restriction>
+  </ClaimType> 
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos un techincal profile para mostrar los datos de registro: SPOLIER</summary>
+   <summary>Creamos un techincal profile para mostrar los datos de registro: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="GetUserInfo">
-          <DisplayName>Get User info</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
-            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="email"/>
-            <InputClaim ClaimTypeReferenceId="newPassword" />
-            <InputClaim ClaimTypeReferenceId="reenterPassword" />
-            <InputClaim ClaimTypeReferenceId="displayName" />
-            <InputClaim ClaimTypeReferenceId="givenName" />
-            <InputClaim ClaimTypeReferenceId="surname" />
-          </InputClaims>
-           <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="email" Required="true"/>
-            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true"/>
-            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true"/>
-            <OutputClaim ClaimTypeReferenceId="displayName" />
-            <OutputClaim ClaimTypeReferenceId="givenName" />
-            <OutputClaim ClaimTypeReferenceId="surname" />
-            <OutputClaim ClaimTypeReferenceId="termsOfUse" Required="true"/>
-          </OutputClaims>
-          <OutputClaimsTransformations>
-            <OutputClaimsTransformation ReferenceId="GenerateSendTermsOfUseBody" />
-          </OutputClaimsTransformations>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="GetUserInfo">
+      <DisplayName>Get User info</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ContentDefinitionReferenceId">api.selfasserted</Item>
+        <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+      </Metadata>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="email"/>
+        <InputClaim ClaimTypeReferenceId="newPassword" />
+        <InputClaim ClaimTypeReferenceId="reenterPassword" />
+        <InputClaim ClaimTypeReferenceId="displayName" />
+        <InputClaim ClaimTypeReferenceId="givenName" />
+        <InputClaim ClaimTypeReferenceId="surname" />
+      </InputClaims>
+        <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="email" Required="true"/>
+        <OutputClaim ClaimTypeReferenceId="newPassword" Required="true"/>
+        <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true"/>
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surname" />
+        <OutputClaim ClaimTypeReferenceId="termsOfUse" Required="true"/>
+      </OutputClaims>
+      <OutputClaimsTransformations>
+        <OutputClaimsTransformation ReferenceId="GenerateSendTermsOfUseBody" />
+      </OutputClaimsTransformations>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile que envíe los términos de uso a nuestra api: SPOLIER</summary>
+   <summary>Creamos un technical profile que envíe los términos de uso a nuestra api: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="CUSTOM-SendTermsOfUse">
-          <DisplayName>Send terms of use acceptation</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/terms-of-use</Item>
-            <Item Key="AuthenticationType">None</Item>
-            <Item Key="SendClaimsIn">Body</Item>
-            <Item Key="AllowInsecureAuthInProduction">true</Item>
-            <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
-            <Item Key="ClaimUsedForRequestPayload">termsOfUseBody</Item>
-          </Metadata>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="termsOfUseBody" />
-          </InputClaims>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-        </TechnicalProfile>
-    ```
+```xml
+    <TechnicalProfile Id="CUSTOM-SendTermsOfUse">
+      <DisplayName>Send terms of use acceptation</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/terms-of-use</Item>
+        <Item Key="AuthenticationType">None</Item>
+        <Item Key="SendClaimsIn">Body</Item>
+        <Item Key="AllowInsecureAuthInProduction">true</Item>
+        <Item Key="DefaultUserMessageIfRequestFailed">Cannot process your request right now, please try again later.</Item>
+        <Item Key="ClaimUsedForRequestPayload">termsOfUseBody</Item>
+      </Metadata>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="termsOfUseBody" />
+      </InputClaims>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Creamos un techincal profile para guardar el usuario en el AAD con las claims extras: SPOLIER</summary>
+   <summary>Creamos un techincal profile para guardar el usuario en el AAD con las claims extras: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="SignupUser">
-          <DisplayName>Sign-up user</DisplayName>
-          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-          <Metadata>
-            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
-            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
-          </Metadata>
-          <CryptographicKeys>
-            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
-          </CryptographicKeys>
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="email"/>
-            <InputClaim ClaimTypeReferenceId="newPassword" />
-            <InputClaim ClaimTypeReferenceId="reenterPassword" />
-            <InputClaim ClaimTypeReferenceId="displayName" />
-            <InputClaim ClaimTypeReferenceId="givenName" />
-            <InputClaim ClaimTypeReferenceId="surname" />
-            <InputClaim ClaimTypeReferenceId="termsOfUse" />
-          </InputClaims>
-           <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="objectId" />
-            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
-            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
-            <OutputClaim ClaimTypeReferenceId="newUser" />
+```xml
+    <TechnicalProfile Id="SignupUser">
+      <DisplayName>Sign-up user</DisplayName>
+      <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+      <Metadata>
+        <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
+        <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+      </Metadata>
+      <CryptographicKeys>
+        <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
+      </CryptographicKeys>
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="email"/>
+        <InputClaim ClaimTypeReferenceId="newPassword" />
+        <InputClaim ClaimTypeReferenceId="reenterPassword" />
+        <InputClaim ClaimTypeReferenceId="displayName" />
+        <InputClaim ClaimTypeReferenceId="givenName" />
+        <InputClaim ClaimTypeReferenceId="surname" />
+        <InputClaim ClaimTypeReferenceId="termsOfUse" />
+      </InputClaims>
+        <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="objectId" />
+        <OutputClaim ClaimTypeReferenceId="email" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+        <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+        <OutputClaim ClaimTypeReferenceId="newUser" />
 
-            <!-- Optional claims, to be collected from the user -->
-            <OutputClaim ClaimTypeReferenceId="displayName" />
-            <OutputClaim ClaimTypeReferenceId="givenName" />
-            <OutputClaim ClaimTypeReferenceId="surName" />
-            <OutputClaim ClaimTypeReferenceId="termsOfUse"/>
-          </OutputClaims>
-          <ValidationTechnicalProfiles>
-            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-          </ValidationTechnicalProfiles>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
-        </TechnicalProfile>
-    ```
+        <!-- Optional claims, to be collected from the user -->
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surName" />
+        <OutputClaim ClaimTypeReferenceId="termsOfUse"/>
+      </OutputClaims>
+      <ValidationTechnicalProfiles>
+        <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
+      </ValidationTechnicalProfiles>
+      <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+    </TechnicalProfile>
+```
     
    </div>
 </details>
 
 <details>
-   <summary>Incluimos los siguientes steps en nuestra USerJourney: SPOLIER</summary>
+   <summary>Incluimos los siguientes steps en nuestra USerJourney: SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <OrchestrationStep Order="5" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="GetUserInfo" TechnicalProfileReferenceId="GetUserInfo" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <OrchestrationStep Order="6" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="TermsOfUse" TechnicalProfileReferenceId="CUSTOM-SendTermsOfUse" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <OrchestrationStep Order="7" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <OrchestrationStep Order="8" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-    ```
+```xml
+    <OrchestrationStep Order="5" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="GetUserInfo" TechnicalProfileReferenceId="GetUserInfo" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+    <OrchestrationStep Order="6" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="TermsOfUse" TechnicalProfileReferenceId="CUSTOM-SendTermsOfUse" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+    <OrchestrationStep Order="7" Type="ClaimsExchange">
+      <ClaimsExchanges>
+        <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
+      </ClaimsExchanges>
+    </OrchestrationStep>
+    <OrchestrationStep Order="8" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+```
     
    </div>
 </details>

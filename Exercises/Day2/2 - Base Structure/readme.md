@@ -56,20 +56,20 @@ Para el uso de las políticas del starter pack, debemos de hacer los siguientes 
 3. Guardamos los cambios.
 
 4. Abrimos el fichero `SignUpOrSignin.xml` y en la etiqueta `<TrustFrameworkPolicy>` establecemos los siguientes valores:
-    ```xml
-    DeploymentMode="Development"
-    UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
-    ```
+```xml
+DeploymentMode="Development"
+UserJourneyRecorderEndpoint="urn:journeyrecorder:applicationinsights"
+```
 
     _**Nota:** en el caso de quue no exista debemos añadir un nodo hijo `<UserJourneyBehaviors>` al nodo `<RelyingParty>` (debería de encontrarse despúes del nodo `<DefaultUserJourney>` o después de `<Endpoints>` si existe la clave)._
 
 
 5. Añadimos el siguiente nodo como hijo del nodo `<UserJourneyBehaviors>` (reemplazando {{APP_INSIGHTS_KEY}} con la clave de instrumentación de `Application Insights`):
 
-    ```xml
-    <JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="{{APP_INSIGHTS_KEY}}" DeveloperMode="true" ClientEnabled="true" ServerEnabled="true" TelemetryVersion="1.0.0" />
-    <ScriptExecution>Allow</ScriptExecution>
-    ```
+```xml
+<JourneyInsights TelemetryEngine="ApplicationInsights" InstrumentationKey="{{APP_INSIGHTS_KEY}}" DeveloperMode="true" ClientEnabled="true" ServerEnabled="true" TelemetryVersion="1.0.0" />
+<ScriptExecution>Allow</ScriptExecution>
+```
 
     _**Nota:** el orden de los nodos es muy importante, sino la validación de las políticas falla._
 

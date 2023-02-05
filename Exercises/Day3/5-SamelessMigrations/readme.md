@@ -108,170 +108,170 @@ Si requiere se le validará contra el antigui Idp y escribimos su contraseña pa
 
 
 <details>
-   <summary>Creamos una claim para almacenar requireMigration en la cuenta de B2C: SPOLIER</summary>
+   <summary>Creamos una claim para almacenar requireMigration en la cuenta de B2C: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<ClaimType Id="extension_requiresMigration">
-				<DisplayName>extension_requiresMigration</DisplayName>
-				<DataType>boolean</DataType>
-				<AdminHelpText>extension_requiresMigration</AdminHelpText>
-				<UserHelpText>extension_requiresMigration</UserHelpText>
-			</ClaimType>
-    ```
+```xml
+		<ClaimType Id="extension_requiresMigration">
+			<DisplayName>extension_requiresMigration</DisplayName>
+			<DataType>boolean</DataType>
+			<AdminHelpText>extension_requiresMigration</AdminHelpText>
+			<UserHelpText>extension_requiresMigration</UserHelpText>
+		</ClaimType>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim para gestionar el campo requireMigration en el flujo: SPOLIER</summary>
+   <summary>Creamos una claim para gestionar el campo requireMigration en el flujo: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<ClaimType Id="requiresMigration">
-				<DisplayName>extension_requiresMigration</DisplayName>
-				<DataType>boolean</DataType>
-				<AdminHelpText>extension_requiresMigration</AdminHelpText>
-				<UserHelpText>extension_requiresMigration</UserHelpText>
-			</ClaimType>
-    ```
+```xml
+		<ClaimType Id="requiresMigration">
+			<DisplayName>extension_requiresMigration</DisplayName>
+			<DataType>boolean</DataType>
+			<AdminHelpText>extension_requiresMigration</AdminHelpText>
+			<UserHelpText>extension_requiresMigration</UserHelpText>
+		</ClaimType>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim para almacenar el primer campo de respuesta del api de Auth: SPOLIER</summary>
+   <summary>Creamos una claim para almacenar el primer campo de respuesta del api de Auth: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<ClaimType Id="tokenSuccess">
-				<DisplayName>tokenSuccess</DisplayName>
-				<DataType>boolean</DataType>
-				<AdminHelpText>tokenSuccess</AdminHelpText>
-				<UserHelpText>tokenSuccess</UserHelpText>
-			</ClaimType>
-    ```
+```xml
+		<ClaimType Id="tokenSuccess">
+			<DisplayName>tokenSuccess</DisplayName>
+			<DataType>boolean</DataType>
+			<AdminHelpText>tokenSuccess</AdminHelpText>
+			<UserHelpText>tokenSuccess</UserHelpText>
+		</ClaimType>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos una claim para almacenar el segundo campo de respuesta del api de Auth: SPOLIER</summary>
+   <summary>Creamos una claim para almacenar el segundo campo de respuesta del api de Auth: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<ClaimType Id="migrationRequired">
-				<DisplayName>migrationRequired</DisplayName>
-				<DataType>boolean</DataType>
-				<AdminHelpText>migrationRequired</AdminHelpText>
-				<UserHelpText>migrationRequired</UserHelpText>
-			</ClaimType>
-    ```
+```xml
+		<ClaimType Id="migrationRequired">
+			<DisplayName>migrationRequired</DisplayName>
+			<DataType>boolean</DataType>
+			<AdminHelpText>migrationRequired</AdminHelpText>
+			<UserHelpText>migrationRequired</UserHelpText>
+		</ClaimType>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos un technical profile que lea el usuario del AAD y popule el campo requireMigration en nuestro claim pipeline: SPOLIER</summary>
+   <summary>Creamos un technical profile que lea el usuario del AAD y popule el campo requireMigration en nuestro claim pipeline: SPOILER</summary>
    <div class="description">
 
-    ```xml
-				<TechnicalProfile Id="Get-requiresMigration-status-signin">
-					<Metadata>
-						<Item Key="Operation">Read</Item>
-						<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
-						<Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user ID.</Item>
-					</Metadata>
-					<IncludeInSso>false</IncludeInSso>
-					<InputClaims>
-						<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="signInNames.emailAddress" Required="true" />
-					</InputClaims>
-					<OutputClaims>
-						<OutputClaim ClaimTypeReferenceId="objectId" />
-						<!-- Set a default value (false) in the case the account does not have this attribute defined -->
-						<OutputClaim ClaimTypeReferenceId="requiresMigration" PartnerClaimType="extension_requiresMigration" DefaultValue="false" />
-					</OutputClaims>
-					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
-				</TechnicalProfile>
-    ```
+```xml
+			<TechnicalProfile Id="Get-requiresMigration-status-signin">
+				<Metadata>
+					<Item Key="Operation">Read</Item>
+					<Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">true</Item>
+					<Item Key="UserMessageIfClaimsPrincipalDoesNotExist">An account could not be found for the provided user ID.</Item>
+				</Metadata>
+				<IncludeInSso>false</IncludeInSso>
+				<InputClaims>
+					<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="signInNames.emailAddress" Required="true" />
+				</InputClaims>
+				<OutputClaims>
+					<OutputClaim ClaimTypeReferenceId="objectId" />
+					<!-- Set a default value (false) in the case the account does not have this attribute defined -->
+					<OutputClaim ClaimTypeReferenceId="requiresMigration" PartnerClaimType="extension_requiresMigration" DefaultValue="false" />
+				</OutputClaims>
+				<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+			</TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos un techincal profile que gestione la autenticación contra el Idp Legacy: SPOLIER</summary>
+   <summary>Creamos un techincal profile que gestione la autenticación contra el Idp Legacy: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<TechnicalProfile Id="UserMigrationViaLegacyIdp">
-					<DisplayName>REST API call to communicate with Legacy IdP</DisplayName>
-					<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-					<Metadata>
-						<Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/sameless-remote-login</Item>
-						<Item Key="AuthenticationType">None</Item>
-						<Item Key="SendClaimsIn">Body</Item>
-						<Item Key="AllowInsecureAuthInProduction">True</Item>
-					</Metadata>
-					<InputClaims>
-						<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="email" />
-						<InputClaim ClaimTypeReferenceId="password" />
-					</InputClaims>
-					<OutputClaims>
-						<OutputClaim ClaimTypeReferenceId="tokenSuccess" DefaultValue="false"/>
-						<OutputClaim ClaimTypeReferenceId="migrationRequired"/>
-					</OutputClaims>
-					<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
-				</TechnicalProfile>
-    ```
+```xml
+		<TechnicalProfile Id="UserMigrationViaLegacyIdp">
+				<DisplayName>REST API call to communicate with Legacy IdP</DisplayName>
+				<Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.RestfulProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+				<Metadata>
+					<Item Key="ServiceUrl">https://b2capidemo.azurewebsites.net/api/sameless-remote-login</Item>
+					<Item Key="AuthenticationType">None</Item>
+					<Item Key="SendClaimsIn">Body</Item>
+					<Item Key="AllowInsecureAuthInProduction">True</Item>
+				</Metadata>
+				<InputClaims>
+					<InputClaim ClaimTypeReferenceId="signInName" PartnerClaimType="email" />
+					<InputClaim ClaimTypeReferenceId="password" />
+				</InputClaims>
+				<OutputClaims>
+					<OutputClaim ClaimTypeReferenceId="tokenSuccess" DefaultValue="false"/>
+					<OutputClaim ClaimTypeReferenceId="migrationRequired"/>
+				</OutputClaims>
+				<UseTechnicalProfileForSessionManagement ReferenceId="SM-Noop" />
+			</TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Creamos technical profile que escriba password en usuario y limpie el campo require migration: SPOLIER</summary>
+   <summary>Creamos technical profile que escriba password en usuario y limpie el campo require migration: SPOILER</summary>
    <div class="description">
 
-    ```xml
-				<TechnicalProfile Id="AAD-WritePasswordAndFlipMigratedFlag">
-					<Metadata>
-						<Item Key="Operation">Write</Item>
-						<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
-					</Metadata>
-					<IncludeInSso>false</IncludeInSso>
-					<InputClaims>
-						<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
-					</InputClaims>
-					<PersistedClaims>
-						<PersistedClaim ClaimTypeReferenceId="objectId" />
-						<PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
-						<PersistedClaim ClaimTypeReferenceId="displayName" />
-						<PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password"/>
-						<PersistedClaim ClaimTypeReferenceId="passwordPolicies" DefaultValue="DisablePasswordExpiration, DisableStrongPassword" AlwaysUseDefaultValue="true"/>
-						<PersistedClaim ClaimTypeReferenceId="extension_requiresMigration" DefaultValue="false" AlwaysUseDefaultValue="true"/>
-					</PersistedClaims>
-					<IncludeTechnicalProfile ReferenceId="AAD-Common" />
-					<UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
-				</TechnicalProfile>
-    ```
+```xml
+			<TechnicalProfile Id="AAD-WritePasswordAndFlipMigratedFlag">
+				<Metadata>
+					<Item Key="Operation">Write</Item>
+					<Item Key="RaiseErrorIfClaimsPrincipalAlreadyExists">false</Item>
+				</Metadata>
+				<IncludeInSso>false</IncludeInSso>
+				<InputClaims>
+					<InputClaim ClaimTypeReferenceId="objectId" Required="true" />
+				</InputClaims>
+				<PersistedClaims>
+					<PersistedClaim ClaimTypeReferenceId="objectId" />
+					<PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
+					<PersistedClaim ClaimTypeReferenceId="displayName" />
+					<PersistedClaim ClaimTypeReferenceId="password" PartnerClaimType="password"/>
+					<PersistedClaim ClaimTypeReferenceId="passwordPolicies" DefaultValue="DisablePasswordExpiration, DisableStrongPassword" AlwaysUseDefaultValue="true"/>
+					<PersistedClaim ClaimTypeReferenceId="extension_requiresMigration" DefaultValue="false" AlwaysUseDefaultValue="true"/>
+				</PersistedClaims>
+				<IncludeTechnicalProfile ReferenceId="AAD-Common" />
+				<UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+			</TechnicalProfile>
+```
    </div>
 </details>
 
 <details>
-   <summary>Definimos los steps de nuestra User Journey: SPOLIER</summary>
+   <summary>Definimos los steps de nuestra User Journey: SPOILER</summary>
    <div class="description">
 
-    ```xml
-			<OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
-			<ClaimsProviderSelections>
-				<ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
-			</ClaimsProviderSelections>
-			<ClaimsExchanges>
-				<ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
-			</ClaimsExchanges>
-			</OrchestrationStep>
-			<!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
-			in the token. -->
-			<OrchestrationStep Order="2" Type="ClaimsExchange">
-			<ClaimsExchanges>
-				<ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
-			</ClaimsExchanges>
-			</OrchestrationStep>
+```xml
+		<OrchestrationStep Order="1" Type="CombinedSignInAndSignUp" ContentDefinitionReferenceId="api.signuporsignin">
+		<ClaimsProviderSelections>
+			<ClaimsProviderSelection ValidationClaimsExchangeId="LocalAccountSigninEmailExchange" />
+		</ClaimsProviderSelections>
+		<ClaimsExchanges>
+			<ClaimsExchange Id="LocalAccountSigninEmailExchange" TechnicalProfileReferenceId="SelfAsserted-LocalAccountSignin-Email" />
+		</ClaimsExchanges>
+		</OrchestrationStep>
+		<!-- This step reads any user attributes that we may not have received when authenticating using ESTS so they can be sent 
+		in the token. -->
+		<OrchestrationStep Order="2" Type="ClaimsExchange">
+		<ClaimsExchanges>
+			<ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
+		</ClaimsExchanges>
+		</OrchestrationStep>
 
-			<OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-    ```
+		<OrchestrationStep Order="3" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
+```
    </div>
 </details>

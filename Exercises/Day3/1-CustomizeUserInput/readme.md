@@ -20,60 +20,60 @@ Lo que necesitamos hacer es añadir es una definición de la claim nueva e inclu
     > (Lo tomamos como herencia o como referencia base)
 
 <details>
-   <summary>STEP 1 SPOLIER</summary>
+   <summary>STEP 1 SPOILER</summary>
    <div class="description">
 
-    ```xml
-      <ClaimType Id="city">
-        <DisplayName>City where you work</DisplayName>
-        <DataType>string</DataType>
-        <UserInputType>DropdownSingleSelect</UserInputType>
-        <Restriction>
-            <Enumeration Text="Berlin" Value="berlin" />
-            <Enumeration Text="London" Value="london" SelectByDefault="true" />
-            <Enumeration Text="Seattle" Value="seattle" />
-        </Restriction>
-      </ClaimType>
-    ```
+```xml
+  <ClaimType Id="city">
+    <DisplayName>City where you work</DisplayName>
+    <DataType>string</DataType>
+    <UserInputType>DropdownSingleSelect</UserInputType>
+    <Restriction>
+        <Enumeration Text="Berlin" Value="berlin" />
+        <Enumeration Text="London" Value="london" SelectByDefault="true" />
+        <Enumeration Text="Seattle" Value="seattle" />
+    </Restriction>
+  </ClaimType>
+```
 
    </div>
 </details>
 
 <details>
-   <summary>STEP 2 SPOLIER</summary>
+   <summary>STEP 2 SPOILER</summary>
    <div class="description">
 
-    ```xml
-        <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
+```xml
+    <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
 
-          <InputClaims>
-            <InputClaim ClaimTypeReferenceId="email"/>
-            <InputClaim ClaimTypeReferenceId="newPassword" />
-            <InputClaim ClaimTypeReferenceId="reenterPassword" />
-            <InputClaim ClaimTypeReferenceId="displayName" />
-            <InputClaim ClaimTypeReferenceId="givenName" />
-            <InputClaim ClaimTypeReferenceId="surname" />
-            <InputClaim ClaimTypeReferenceId="city" />
-          </InputClaims>
-          
-           <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="objectId" />
-            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
-            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
-            <OutputClaim ClaimTypeReferenceId="newUser" />
+      <InputClaims>
+        <InputClaim ClaimTypeReferenceId="email"/>
+        <InputClaim ClaimTypeReferenceId="newPassword" />
+        <InputClaim ClaimTypeReferenceId="reenterPassword" />
+        <InputClaim ClaimTypeReferenceId="displayName" />
+        <InputClaim ClaimTypeReferenceId="givenName" />
+        <InputClaim ClaimTypeReferenceId="surname" />
+        <InputClaim ClaimTypeReferenceId="city" />
+      </InputClaims>
+      
+        <OutputClaims>
+        <OutputClaim ClaimTypeReferenceId="objectId" />
+        <OutputClaim ClaimTypeReferenceId="email" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
+        <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
+        <OutputClaim ClaimTypeReferenceId="authenticationSource" />
+        <OutputClaim ClaimTypeReferenceId="newUser" />
 
-            <!-- Optional claims, to be collected from the user -->
-            <OutputClaim ClaimTypeReferenceId="displayName" />
-            <OutputClaim ClaimTypeReferenceId="givenName" />
-            <OutputClaim ClaimTypeReferenceId="surName" />
-            <OutputClaim ClaimTypeReferenceId="city"/>
-          </OutputClaims>
+        <!-- Optional claims, to be collected from the user -->
+        <OutputClaim ClaimTypeReferenceId="displayName" />
+        <OutputClaim ClaimTypeReferenceId="givenName" />
+        <OutputClaim ClaimTypeReferenceId="surName" />
+        <OutputClaim ClaimTypeReferenceId="city"/>
+      </OutputClaims>
 
-        </TechnicalProfile>
-    ```
+    </TechnicalProfile>
+```
     
    </div>
 </details>

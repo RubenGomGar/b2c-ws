@@ -60,3 +60,29 @@ Este día está mas enfocado a hacer la practica de escenarios complejos. Los ej
 - 6 - MigrationFlow
 - 7 - MultiBrandFlow
 - 8 - TermsOfService
+
+
+# Documentación
+
+Para visualizar la documentación de forma sencilla en una web, se hace uso de [MkDocs](https://www.mkdocs.org/) para levantar una web en local y visualizar de manera sencilla y rápida la documentación (que podemos exponer para los asistentes, con Ngrok por ejemplo).
+
+Para levantar la web hace falta tener instalado Python 3.x e instalar MkDocs:
+```shell
+pip install mkdocs
+```
+
+Los ficheros relacionados con este proyecto son los siguientes:
+- mkdocs.yml
+- Exercies/index.md
+- Todos los ficheros `*.md` dentro de la carpeta `Exercises`
+
+Para levantar el servidor web con la documentación ejecutar:
+```shell
+mkdocs serve
+```
+Esto expone en localhost:8000 la página principal.
+
+Para construir el sitio web para ser publicado como sitio estático ejecutar:
+```shell
+mkdocs build
+```
