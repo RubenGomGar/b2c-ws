@@ -17,15 +17,7 @@
 
   <BuildingBlocks>
     <ClaimsSchema>
-      <ClaimType Id="gender">
-        <DisplayName>Gender</DisplayName>
-        <DataType>string</DataType>
-        <UserInputType>DropdownSingleSelect</UserInputType>
-        <Restriction>
-          <Enumeration Text="Male" Value="M" />
-          <Enumeration Text="Female" Value="F" />
-        </Restriction>
-      </ClaimType>
+      <!-- Tu contenido aquí -->
     </ClaimsSchema>
     <ContentDefinitions>
       <!-- Tu contenido aquí -->
@@ -37,81 +29,73 @@
 
   <ClaimsProviders>
     <ClaimsProvider>
-      <DisplayName>Self Asserted</DisplayName>
+      <DisplayName>AAD SSPR</DisplayName>
       <TechnicalProfiles>
-        <TechnicalProfile Id="SignupUser">
-          <DisplayName>Sign-up user</DisplayName>
-          <Protocol Name="Proprietary"
-            Handler="Web.TPEngine.Providers.SelfAssertedAttributeProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+        <TechnicalProfile Id="AadSspr-SendCode">
+          <DisplayName>Send Code</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
           <Metadata>
-            <Item Key="IpAddressClaimReferenceId">IpAddress</Item>
-            <Item Key="ContentDefinitionReferenceId">api.localaccountsignup</Item>
+            <Item Key="Operation">SendCode</Item>
           </Metadata>
-          <CryptographicKeys>
-            <Key Id="issuer_secret" StorageReferenceId="B2C_1A_TokenSigningKeyContainer" />
-          </CryptographicKeys>
           <InputClaims>
-            <InputClaim ClaimTypeReferenceId="email" />
-            <InputClaim ClaimTypeReferenceId="newPassword" />
-            <InputClaim ClaimTypeReferenceId="reenterPassword" />
-            <InputClaim ClaimTypeReferenceId="displayName" />
-            <InputClaim ClaimTypeReferenceId="givenName" />
-            <InputClaim ClaimTypeReferenceId="surname" />
-            <InputClaim ClaimTypeReferenceId="gender" />
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="emailAddress"/>
+          </InputClaims>
+        </TechnicalProfile>
+        <TechnicalProfile Id="AadSspr-VerifyCode">
+          <DisplayName>Verify Code</DisplayName>
+          <Protocol Name="Proprietary" Handler="Web.TPEngine.Providers.AadSsprProtocolProvider, Web.TPEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+          <Metadata>
+            <Item Key="Operation">VerifyCode</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="verificationCode" PartnerClaimType="verificationCode" />
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="emailAddress"/>
+          </InputClaims>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>Local Account</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="AAD-CheckEmailAddressExists">
+          <Metadata>
+            <Item Key="Operation">Read</Item>
+            <Item Key="RaiseErrorIfClaimsPrincipalDoesNotExist">false</Item>
+          </Metadata>
+          <InputClaims>
+            <InputClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames.emailAddress" Required="true"/>
           </InputClaims>
           <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="objectId" />
-            <OutputClaim ClaimTypeReferenceId="email" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
-            <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
-            <OutputClaim ClaimTypeReferenceId="authenticationSource" />
-            <OutputClaim ClaimTypeReferenceId="newUser" />
-
-            <!-- Optional claims, to be collected from the user -->
-            <OutputClaim ClaimTypeReferenceId="displayName" />
-            <OutputClaim ClaimTypeReferenceId="givenName" />
-            <OutputClaim ClaimTypeReferenceId="surname" />
-            <OutputClaim ClaimTypeReferenceId="gender" />
+            <OutputClaim ClaimTypeReferenceId="objectId"/>
           </OutputClaims>
-          <ValidationTechnicalProfiles>
-            <ValidationTechnicalProfile ReferenceId="AAD-UserWriteUsingLogonEmail" />
-          </ValidationTechnicalProfiles>
-          <UseTechnicalProfileForSessionManagement ReferenceId="SM-AAD" />
+          <IncludeTechnicalProfile ReferenceId="AAD-Common"/>
+        </TechnicalProfile>
+      </TechnicalProfiles>
+    </ClaimsProvider>
+    <ClaimsProvider>
+      <DisplayName>Reset Password</DisplayName>
+      <TechnicalProfiles>
+        <TechnicalProfile Id="LocalAccountDiscoveryUsingEmailAddress">
+          <DisplayClaims>
+            <DisplayClaim DisplayControlReferenceId="emailVerificationSSPRControl"/>
+          </DisplayClaims>
         </TechnicalProfile>
       </TechnicalProfiles>
     </ClaimsProvider>
   </ClaimsProviders>
 
-  <UserJourneys>
-    <UserJourney Id="CustomizeUserInput">
-      <OrchestrationSteps>
-        <OrchestrationStep Order="1" Type="ClaimsExchange">
-          <ClaimsExchanges>
-            <ClaimsExchange Id="RegisterUser" TechnicalProfileReferenceId="SignupUser" />
-          </ClaimsExchanges>
-        </OrchestrationStep>
-        <OrchestrationStep Order="2" Type="SendClaims"
-          CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-      </OrchestrationSteps>
-      <ClientDefinition ReferenceId="DefaultWeb" />
-    </UserJourney>
-  </UserJourneys>
-
   <RelyingParty>
-    <DefaultUserJourney ReferenceId="CustomizeUserInput" />
-    <TechnicalProfile Id="CustomizeUserInput">
+    <DefaultUserJourney ReferenceId="PasswordReset" />
+    <TechnicalProfile Id="PolicyProfile">
       <DisplayName>PolicyProfile</DisplayName>
       <Protocol Name="OpenIdConnect" />
       <OutputClaims>
-        <OutputClaim ClaimTypeReferenceId="displayName" />
-        <OutputClaim ClaimTypeReferenceId="givenName" />
-        <OutputClaim ClaimTypeReferenceId="surname" />
-        <OutputClaim ClaimTypeReferenceId="email" />
-        <OutputClaim ClaimTypeReferenceId="gender" />
+        <OutputClaim ClaimTypeReferenceId="displayName" DefaultValue="" />
+        <OutputClaim ClaimTypeReferenceId="givenName" DefaultValue="" />
+        <OutputClaim ClaimTypeReferenceId="surname" DefaultValue="" />
+        <OutputClaim ClaimTypeReferenceId="email" DefaultValue="" />
         <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="sub" />
-        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true"
-          DefaultValue="{Policy:TenantObjectId}" />
+        <OutputClaim ClaimTypeReferenceId="tenantId" AlwaysUseDefaultValue="true" DefaultValue="{Policy:TenantObjectId}" />
       </OutputClaims>
       <SubjectNamingInfo ClaimType="sub" />
     </TechnicalProfile>

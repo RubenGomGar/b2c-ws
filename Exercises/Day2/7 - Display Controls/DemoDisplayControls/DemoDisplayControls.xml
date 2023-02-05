@@ -25,9 +25,6 @@
       </ClaimType>
     </ClaimsSchema>
     <ContentDefinitions>
-      <ContentDefinition Id="api.localaccountsignup">
-        <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.0</DataUri>
-      </ContentDefinition>
       <ContentDefinition Id="api.localaccountpasswordreset">
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:2.1.0</DataUri>
       </ContentDefinition>
@@ -118,16 +115,6 @@
     <ClaimsProvider>
       <DisplayName>Local Account</DisplayName>
       <TechnicalProfiles>
-        <TechnicalProfile Id="LocalAccountSignUpWithLogonEmail">
-           <DisplayClaims>
-            <DisplayClaim DisplayControlReferenceId="emailVerificationControl" />
-            <DisplayClaim ClaimTypeReferenceId="displayName" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="givenName" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="surName" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="newPassword" Required="true" />
-            <DisplayClaim ClaimTypeReferenceId="reenterPassword" Required="true" />
-          </DisplayClaims>
-        </TechnicalProfile>
         <TechnicalProfile Id="AAD-CheckEmailAddressExists">
           <Metadata>
             <Item Key="Operation">Read</Item>
